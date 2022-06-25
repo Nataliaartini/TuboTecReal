@@ -1,5 +1,5 @@
 # TuboTecReal
-<p><strong>Projeto integrador das matérias: banco de dados I, Engenharia de Software I, e Programação II.</strong></p><br>
+<h3><strong>Projeto integrador das matérias: banco de dados I, Engenharia de Software I, e Programação II.</strong></h3><br>
 <p>O presente projeto consiste em uma aplicação web, feita para atender as necessidades da empresa TuboTec Real.</p>
 <p>O sistema contempla um controle de estoque, controle de produção e venda, controle financeiro, cadastro de funcionários e um gerenciador de documentos</p>
 <p>A organização do projeto foi pensada e feita nas aulas de <strong>engenharia de software I com a professora Raquel Pegoraro</strong>, <br>
