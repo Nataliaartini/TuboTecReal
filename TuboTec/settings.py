@@ -74,10 +74,15 @@ WSGI_APPLICATION = 'TuboTec.wsgi.application'
 # Database
 # https://docs.djangoproject.com/en/4.0/ref/settings/#databases
 
+
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': BASE_DIR / 'db.sqlite3',
+        'ENGINE': 'django.db.backends.postgresql',
+        'NAME':'postgres',
+        'USER':'postgres',
+        'PASSWORD':'postgres',
+        'HOST':'localhost',
+        'PORT':'5432',
     }
 }
 
@@ -125,11 +130,11 @@ MEDIA_URL = '/media/'
 MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 
 MESSAGE_TAGS = {
-    messages.ERROR: 'alert-danger'
-    messages.SUCCESS: 'alert-success'
-    messages.WARNING: 'alert-warning'
-    messages.INFO: 'alert-info'
-    messages.DEBUG: 'alert-info'
+    messages.ERROR: 'alert-danger',
+    messages.SUCCESS: 'alert-success',
+    messages.WARNING: 'alert-warning',
+    messages.INFO: 'alert-info',
+    messages.DEBUG: 'alert-info',
 }
 
 # Default primary key field type
