@@ -1,5 +1,5 @@
 from django.contrib import admin
-from .forms import VariacaoObrigatoria
+from forms import VariacaoObrigatoria
 from . import models
 
 
