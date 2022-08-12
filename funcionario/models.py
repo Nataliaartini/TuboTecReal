@@ -1,7 +1,7 @@
 from django.db import models
 from django.utils import timezone
 
-
+app_name = 'funcionario'
 class Funcionario(models.Model):
     cpf = models.CharField(max_length=11, unique=True)
     nome = models.CharField(max_length=30)
