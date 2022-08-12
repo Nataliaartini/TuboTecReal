@@ -1,5 +1,5 @@
 from django.contrib import admin
-from forms import VariacaoObrigatoria
+from .forms import VariacaoObrigatoria
 from . import models
 
 
@@ -20,4 +20,4 @@ class ProdutoAdmin(admin.ModelAdmin):
 
 
 admin.site.register(models.Produto, ProdutoAdmin)
-# admin.site.register(models.Variacao)
+admin.site.register(models.Variacao)
