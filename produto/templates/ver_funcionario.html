@@ -1,0 +1,43 @@
+{%extends 'base.html'%}
+
+{%block 'titulo'%}
+{{funcionario.nome}} |
+{%endblock%}
+
+
+{%block 'content'%}
+<style>
+    body {
+    font-size : 20px;
+    background: #1C1C1C;
+    color: #DCA6FF;
+    }
+</style>
+<h1 class="mt-5">{{funcionario.nome}}</h1>
+
+{% if funcionario.foto %}
+<p>
+    <img src="{{funcionario.foto.url}}" style="max-width:150px; height: auto; ">
+</p>
+{% endif %}
+
+<dl>
+    <dt>CPF</dt>
+    <dd>{{cpf}}</dd>
+
+    <dt>Telefone</dt>
+    <dd>{{funcionario.telefone}}</dd>
+
+    <dt>nome</dt>
+    <dd>{{funcionario.nome}}</dd>
+
+    <dt>Data admissão</dt>
+    <dd>{{funcionario.data_admissao|date:'d/m/y'}}</dd>
+
+    <dt>Salário</dt>
+    <dd>{{funcionario.salario}}</dd>
+
+    <dt>Descrição</dt>
+    <dd>{{funcionario.descricao}}</dd>
+</dl>
+{%endblock%}

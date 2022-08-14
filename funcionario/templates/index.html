@@ -1,7 +1,7 @@
 {% extends 'base.html' %}
 
 {%block 'content'%}
-<h1 class="mt-5">Minha agenda</h1>
+<h1 class="mt-5">Funcionários</h1>
 <style>
     body {
     font-size : 20px;
@@ -17,17 +17,17 @@
             <th><FONT COLOR="#836FFF">Nome</FONT></th>
             <th><FONT COLOR="#836FFF">Sobrenome</FONT></th>
             <th><FONT COLOR="#836FFF">Telefone</FONT></th>
-            <th><FONT COLOR="#836FFF">Categoria</FONT></th>
+            <th><FONT COLOR="#836FFF">Data de Admissão</FONT></th>
         </tr>
         </thead>
         <tbody>
-        {% for contato in contatos %}
+        {% for func in funcionario %}
             <tr>
-            <td><FONT COLOR="#7DCCFF">{{contato.id}}</FONT></td>
-            <td><a href="{% url 'ver_contato' contato.id %}">{{contato.nome}}</a></td>
-            <td><FONT COLOR="#7DCCFF">{{contato.sobrenome}}</FONT></td>
-            <td><FONT COLOR="#7DCCFF">{{contato.telefone}}</FONT></td>
-            <td><FONT COLOR="#7DCCFF">{{contato.categoria}}</FONT></td>
+            <td><FONT COLOR="#7DCCFF">{{funcionario.id}}</FONT></td>
+            <td><a href="{% url 'ver_contato' contato.id %}">{{funcionario.nome}}</a></td>
+            <td><FONT COLOR="#7DCCFF">{{funcionario.sobrenome}}</FONT></td>
+            <td><FONT COLOR="#7DCCFF">{{funcionario.telefone}}</FONT></td>
+            <td><FONT COLOR="#7DCCFF">{{funcionario.data_admissao}}</FONT></td>
         </tr>
         {% endfor %}
         </tbody>
@@ -35,8 +35,8 @@
 
 <nav aria-label="Page navigation example">
     <ul class="pagination">
-        {% for pagina in contatos.paginator.page_range %}
-            {%if contatos.number == pagina%}
+        {% for pagina in funcionario.paginator.page_range %}
+            {%if funcionario.number == pagina%}
                 <li class="page-item active"><a class="page-link" href="?p={{ pagina }}">{{ pagina }}</a></li>
             {%else%}
                 <li class="page-item"><a class="page-link" href="?p={{ pagina }}&termo={{request.GET.termo}}">{{ pagina }}</a></li>

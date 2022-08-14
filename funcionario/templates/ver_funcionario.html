@@ -1,7 +1,7 @@
 {%extends 'base.html'%}
 
 {%block 'titulo'%}
-{{contato.nome}} |
+{{funcionario.nome}} |
 {%endblock%}
 
 
@@ -13,11 +13,11 @@
     color: #DCA6FF;
     }
 </style>
-<h1 class="mt-5">{{contato.nome}}</h1>
+<h1 class="mt-5">{{funcionario.nome}}</h1>
 
-{% if contato.foto %}
+{% if funcionario.foto %}
 <p>
-    <img src="{{contato.foto.url}}" style="max-width:150px; height: auto; ">
+    <img src="{{funcionario.foto.url}}" style="max-width:150px; height: auto; ">
 </p>
 {% endif %}
 
@@ -26,7 +26,7 @@
     <dd>{{cpf}}</dd>
 
     <dt>Telefone</dt>
-    <dd>{{contato.telefone}}</dd>
+    <dd>{{funcionario.telefone}}</dd>
 
     <dt>nome</dt>
     <dd>{{funcionario.nome}}</dd>
@@ -38,6 +38,6 @@
     <dd>{{funcionario.salario}}</dd>
 
     <dt>Descrição</dt>
-    <dd>{{contato.descricao}}</dd>
+    <dd>{{funcionario.descricao}}</dd>
 </dl>
 {%endblock%}

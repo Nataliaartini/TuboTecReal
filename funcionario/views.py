@@ -9,6 +9,8 @@ from django.core.paginator import Paginator
 from django.db.models import Q, Value
 from django.db.models.functions import Concat
 from django.contrib import messages
+
+
 #
 # class FuncionarioListView(ListView):
 #     def get(self, request, *args, **kwargs):
@@ -30,21 +32,23 @@ from django.contrib import messages
 #     template_name = 'funcionario/editar.html'
 
 def index(request):
-    contatos = Funcionario.objects.order_by('nome').filter(mostrar=True)
-    paginator = Paginator(contatos, 4)
+    funcionario = Funcionario.objects.order_by('nome').filter(mostrar=True)
+    paginator = Paginator(funcionario, 4)
     page = request.GET.get("p")
-    contatos = paginator.get_page(page)
-    return render(request, 'contatos/index.html', {
-        "contatos": contatos
+    funcionario = paginator.get_page(page)
+    return render(request, 'funcionario/index.html', {
+        "funcionario": funcionario
     })
+
 
 def ver_funcionario(request, cpf):
     contato = get_object_or_404(Funcionario, id=cpf)
     if not contato.mostrar:
         raise Http404()
-    return render(request, 'funcionarios/ver_funcionario.html', {
+    return render(request, 'funcionario/ver_funcionario.html', {
         "funcionario": Funcionario
     })
+
 
 def busca(request):
     termo = request.GET.get("termo")
@@ -53,10 +57,10 @@ def busca(request):
         return redirect('index')
     campos = Concat("nome", Value(" "), "sobrenome")
     funcionarios = Funcionario.objects.annotate(nome_completo=campos).filter(Q(nome_completo__icontains=termo) |
-                                                                     Q(telefone__icontains=termo))
+                                                                             Q(telefone__icontains=termo))
     paginator = Paginator(funcionarios, 4)
     page = request.GET.get("p")
     funcionarios = paginator.get_page(page)
-    return render(request, 'funcionarios/busca.html', {
-        "funcionarios": funcionarios
+    return render(request, 'funcionario/busca.html', {
+        "funcionario": funcionarios
     })

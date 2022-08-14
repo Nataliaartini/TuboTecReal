@@ -12,40 +12,25 @@ class Produto(models.Model):
     imagem = models.ImageField(
         upload_to='produto_imagens/%Y/%m/', blank=True, null=True)
     slug = models.SlugField(unique=True, blank=True, null=True)
-    preco_marketing = models.FloatField(verbose_name='Preço')
-    preco_marketing_promocional = models.FloatField(
-        default=0, verbose_name='Preço Promo.')
-    tipo = models.CharField(
-        default='V',
-        max_length=1,
-        choices=(
-            ('V', 'Variável'),
-            ('S', 'Simples'),
-        )
-    )
-
+    preco = models.FloatField(verbose_name='Preço')
     class Meta:
         db_table = 'produto'
         verbose_name = 'Produto'
         verbose_name_plural = 'Produtos'
         ordering = ['nome']
-        unique_together = ['nome', 'marca']
-        index_together = ['nome', 'marca']
+        unique_together = ['nome']
+        index_together = ['nome']
         managed = True
-        permissions = (
-            ('view_produto', 'Can view produto'),
-            ('add_produto', 'Can add produto'),
-            ('change_produto', 'Can change produto'),
-            ('delete_produto', 'Can delete produto'),
-        )
+        # permissions = (
+        #     ('view_produto', 'Can view produto'),
+        #     ('add_produto', 'Can add produto'),
+        #     ('change_produto', 'Can change produto'),
+        #     ('delete_produto', 'Can delete produto'),
+        # )
 
     def get_preco_formatado(self):
-        return utils.formata_preco(self.preco_marketing)
+        return utils.formata_preco(self.preco)
     get_preco_formatado.short_description = 'Preço'
-
-    def get_preco_promocional_formatado(self):
-        return utils.formata_preco(self.preco_marketing_promocional)
-    get_preco_promocional_formatado.short_description = 'Preço Promo.'
 
     @staticmethod
     def resize_image(img, new_width=800):

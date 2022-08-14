@@ -1,7 +1,8 @@
 from django.db import models
 from django.utils import timezone
 
-#app_name = 'funcionario'
+
+# app_name = 'funcionario'
 class Funcionario(models.Model):
     cpf = models.CharField(max_length=11, unique=True)
     nome = models.CharField(max_length=30)
@@ -9,8 +10,9 @@ class Funcionario(models.Model):
     descricao = models.TextField(blank=True)
     telefone = models.CharField(max_length=100)
     salario = models.FloatField(default=0)
-    data_criacao = models.DateTimeField(default=timezone.now)
+    data_admissao = models.DateTimeField(default=timezone.now)
     mostrar = models.BooleanField(default=True)
+
     # foto = models.ImageField(blank=True, upload_to='pictures/%Y/%m/')
 
     class Meta:
