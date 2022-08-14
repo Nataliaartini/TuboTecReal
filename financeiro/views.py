@@ -1,13 +1,18 @@
-from django.shortcuts import render
-from django.views.generic import ListView, DetailView
+from django.shortcuts import render, redirect, reverse, get_object_or_404
+from django.views.generic.list import ListView
+from django.views.generic.detail import DetailView
 from django.views import View
-from django.http import HttpResponse
+from django.contrib import messages
+from django.db.models import Q
 
+from . import models
 
 class Caixa(View):
+    model = models.Caixa
+    template_name = 'index.html'
+    context_object_name = 'produtos'
     def get(self, request, *args, **kwargs):
-        return HttpResponse('Caixa')
-        # return render(request, 'financeiro/caixa.html')
+        return render(request, 'caixa.html')
 
 class Entrada(View):
     def get(self, request, *args, **kwargs):

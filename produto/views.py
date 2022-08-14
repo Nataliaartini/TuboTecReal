@@ -38,7 +38,7 @@ from . import models
 
 class ListaProdutos(ListView):
     model = models.Produto
-    template_name = 'produto/lista.html'
+    template_name = 'index.html'
     context_object_name = 'produtos'
     paginate_by = 9
     ordering = ['-id']
@@ -64,7 +64,7 @@ class Busca(ListaProdutos):
 
 class DetalheProduto(DetailView):
     model = models.Produto
-    template_name = 'produto/detalhe.html'
+    template_name = 'detalhe.html'
     context_object_name = 'produto'
     slug_url_kwarg = 'slug'
 
@@ -175,5 +175,5 @@ class Estoque(View):
             'estoque': self.request.session.get('estoque', {})
         }
 
-        return render(self.request, 'produto/estoque.html', contexto)
+        return render(self.request, 'estoque.html', contexto)
 #ainda nao sei como vai ficar essa parte do estoque "detalhe" do produto talvez, tem que ver

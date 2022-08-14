@@ -36,7 +36,7 @@ def index(request):
     paginator = Paginator(funcionario, 4)
     page = request.GET.get("p")
     funcionario = paginator.get_page(page)
-    return render(request, 'funcionario/index.html', {
+    return render(request, 'index.html', {
         "funcionario": funcionario
     })
 
@@ -45,7 +45,7 @@ def ver_funcionario(request, cpf):
     contato = get_object_or_404(Funcionario, id=cpf)
     if not contato.mostrar:
         raise Http404()
-    return render(request, 'funcionario/ver_funcionario.html', {
+    return render(request, 'ver_funcionario.html', {
         "funcionario": Funcionario
     })
 
@@ -61,6 +61,6 @@ def busca(request):
     paginator = Paginator(funcionarios, 4)
     page = request.GET.get("p")
     funcionarios = paginator.get_page(page)
-    return render(request, 'funcionario/busca.html', {
+    return render(request, 'busca.html', {
         "funcionario": funcionarios
     })

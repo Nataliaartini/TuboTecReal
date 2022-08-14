@@ -1,84 +1,48 @@
-<!DOCTYPE html>
-<html lang="pt">
+{% extends 'base.html' %}
 
-<head>
+{%block 'content'%}
+<h1 class="mt-5">Funcionários</h1>
+<style>
+    body {
+    font-size : 20px;
+    background: #1C1C1C;
+    color: #ADD8E6;
+    }
+</style>
 
-  <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-  <meta name="description" content="">
-  <meta name="author" content="">
-
-  <title>Agenda</title>
-
-  <!-- Bootstrap core CSS -->
-  <link href="vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
-
-</head>
-
-<body>
-
-  <!-- Navigation -->
-  <nav class="navbar navbar-expand-lg navbar-dark bg-dark static-top">
-    <div class="container">
-      <a class="navbar-brand" href="#">Agenda</a>
-      <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarResponsive"
-        aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
-        <span class="navbar-toggler-icon"></span>
-      </button>
-    </div>
-  </nav>
-
-  <!-- Page Content -->
-  <div class="container">
-    <div class="row">
-      <div class="col-lg-12">
-        <h1 class="mt-5">Minha agenda</h1>
-
-        <table class="table">
-          <thead>
+    <table class="table">
+        <thead>
+        <tr>
+            <th><FONT COLOR="#836FFF">ID</FONT></th>
+            <th><FONT COLOR="#836FFF">Nome</FONT></th>
+            <th><FONT COLOR="#836FFF">Sobrenome</FONT></th>
+            <th><FONT COLOR="#836FFF">Telefone</FONT></th>
+            <th><FONT COLOR="#836FFF">Data de Admissão</FONT></th>
+        </tr>
+        </thead>
+        <tbody>
+        {% for func in funcionario %}
             <tr>
-              <th>Nome</th>
-              <th>Sobrenome</th>
-              <th>Telefone</th>
-              <th>Categoria</th>
-            </tr>
-          </thead>
-          <tbody>
-            <tr>
-              <td>
-                <a href="#"> João</a>
-              </td>
-              <td>Miranda</td>
-              <td>35 9 5555-5555</td>
-              <td>Família</td>
-            </tr>
-            <tr>
-              <td>
-                <a href="#"> Leandro</a>
-              </td>
-              <td>Moreira</td>
-              <td>35 9 8888-5555</td>
-              <td>Família</td>
-            </tr>
-            <tr>
-              <td>
-                <a href="#"> Fátima</a>
-              </td>
-              <td>Oliveira</td>
-              <td>35 9 9999-4352</td>
-              <td>Conhecidos</td>
-            </tr>
-          </tbody>
-        </table>
+            <td><FONT COLOR="#7DCCFF">{{funcionario.id}}</FONT></td>
+            <td><a href="{% url 'ver_contato' contato.id %}">{{funcionario.nome}}</a></td>
+            <td><FONT COLOR="#7DCCFF">{{funcionario.sobrenome}}</FONT></td>
+            <td><FONT COLOR="#7DCCFF">{{funcionario.telefone}}</FONT></td>
+            <td><FONT COLOR="#7DCCFF">{{funcionario.data_admissao}}</FONT></td>
+        </tr>
+        {% endfor %}
+        </tbody>
+    </table>
 
-      </div>
-    </div>
-  </div>
+<nav aria-label="Page navigation example">
+    <ul class="pagination">
+        {% for pagina in funcionario.paginator.page_range %}
+            {%if funcionario.number == pagina%}
+                <li class="page-item active"><a class="page-link" href="?p={{ pagina }}">{{ pagina }}</a></li>
+            {%else%}
+                <li class="page-item"><a class="page-link" href="?p={{ pagina }}&termo={{request.GET.termo}}">{{ pagina }}</a></li>
+            {%endif%}
+        {% endfor %}
+    </ul>
+</nav>
 
-  <!-- Bootstrap core JavaScript -->
-  <script src="vendor/jquery/jquery.slim.min.js"></script>
-  <script src="vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
-
-</body>
-
-</html>
+{%endblock%}
