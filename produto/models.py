@@ -3,7 +3,8 @@ import os
 from PIL import Image
 from django.db import models
 from django.utils.text import slugify
-# from utils import utils
+from utils import utils
+
 
 class Produto(models.Model):
     nome = models.CharField(max_length=255)
@@ -13,14 +14,14 @@ class Produto(models.Model):
         upload_to='produto_imagens/%Y/%m/', blank=True, null=True)
     slug = models.SlugField(unique=True, blank=True, null=True)
     preco = models.FloatField(verbose_name='Preço')
-    class Meta:
-        db_table = 'produto'
-        verbose_name = 'Produto'
-        verbose_name_plural = 'Produtos'
-        ordering = ['nome']
-        unique_together = ['nome']
-        index_together = ['nome']
-        managed = True
+    # class Meta:
+    #     db_table = 'produto'
+    #     verbose_name = 'Produto'
+    #     verbose_name_plural = 'Produtos'
+    #     ordering = ['nome']
+    #     unique_together = ['nome']
+    #     index_together = ['nome']
+    #     managed = True
         # permissions = (
         #     ('view_produto', 'Can view produto'),
         #     ('add_produto', 'Can add produto'),
@@ -71,7 +72,6 @@ class Variacao(models.Model):
     produto = models.ForeignKey(Produto, on_delete=models.CASCADE)
     nome = models.CharField(max_length=50, blank=True, null=True)
     preco = models.FloatField()
-    preco_promocional = models.FloatField(default=0)
     estoque = models.PositiveIntegerField(default=1)
 
     def __str__(self):

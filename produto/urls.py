@@ -7,9 +7,10 @@ from .views import *
 app_name = 'produto'
 
 urlpatterns = [
-    path('', views.ListaProduto.as_view(), name='lista'),
+    path('', views.ListaProdutos.as_view(), name='lista'),
     path('<slug>', views.DetalheProduto.as_view(), name='detalhe'),
-    path('cadastrar', views.CadastrarProduto.as_view(), name='cadastrar'),
-    path('entrada de estoque', views.CadastrarProduto.as_view(), name='entrada_estoque'),
-    path('saída de estoque', views.CadastrarProduto.as_view(), name='saida_estoque'),
-    ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
+    path('entrada/<slug>', views.AdicionarAoEstoque.as_view(), name='entrada'),
+    path('saida/<slug>', views.RemoverDoEstoque.as_view(), name='saida'),
+    path('cadastrar/', views.Estoque.as_view(), name='cadastrar'),
+
+    ] #+ static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
