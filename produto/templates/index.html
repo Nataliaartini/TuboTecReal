@@ -1,7 +1,7 @@
 {% extends 'base.html' %}
 
 {%block 'content'%}
-<h1 class="mt-5">Funcionários</h1>
+<h1 class="mt-5">Produtos</h1>
 <style>
     body {
     font-size : 20px;
@@ -13,21 +13,24 @@
     <table class="table">
         <thead>
         <tr>
-            <th><FONT COLOR="#836FFF">ID</FONT></th>
-            <th><FONT COLOR="#836FFF">Nome</FONT></th>
-            <th><FONT COLOR="#836FFF">Sobrenome</FONT></th>
-            <th><FONT COLOR="#836FFF">Telefone</FONT></th>
-            <th><FONT COLOR="#836FFF">Data de Admissão</FONT></th>
+            <th><FONT COLOR="#836FFF">CÓDIGO</FONT></th>
+            <th><FONT COLOR="#836FFF">PRODUTO</FONT></th>
+            <th><FONT COLOR="#836FFF">PREÇO</FONT></th>
+            <th><FONT COLOR="#836FFF">DESCRIÇÃO</FONT></th>
+            <th><FONT COLOR="#836FFF">QUANTIDADE ESTOQUE</FONT></th>
+    
         </tr>
         </thead>
         <tbody>
-        {% for func in funcionario %}
+       
+        {% for prod in produto %} 
             <tr>
-            <td><FONT COLOR="#7DCCFF">{{funcionario.id}}</FONT></td>
-            <td><a href="{% url 'ver_contato' contato.id %}">{{funcionario.nome}}</a></td>
-            <td><FONT COLOR="#7DCCFF">{{funcionario.sobrenome}}</FONT></td>
-            <td><FONT COLOR="#7DCCFF">{{funcionario.telefone}}</FONT></td>
-            <td><FONT COLOR="#7DCCFF">{{funcionario.data_admissao}}</FONT></td>
+            <td><FONT COLOR="#7DCCFF">{{produto.id}}</FONT></td>
+            <td><a href="{% url 'ver_produto' produto.id %}">{{produto.nome}}</a></td>
+            <td><FONT COLOR="#7DCCFF">{{produto.descricao}}</FONT></td>
+            <td><FONT COLOR="#7DCCFF">{{produto.preco}}</FONT></td>
+            <td><FONT COLOR="#7DCCFF">{{produto.qtd_estoque}}</FONT></td>
+
         </tr>
         {% endfor %}
         </tbody>
