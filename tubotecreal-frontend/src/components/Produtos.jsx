@@ -1,11 +1,21 @@
- import React from "react";
-import {Box, Button, Grid, IconButton, MenuItem, Paper, Select, Stack, TextField,} from "@mui/material";
+import React from "react";
+import {
+    Box,
+    Button,
+    Grid,
+    IconButton,
+    MenuItem,
+    Paper,
+    Select,
+    Stack,
+    TextField,
+} from "@mui/material";
 import DeleteIcon from "@mui/icons-material/Delete";
 import axios from "axios";
 import NumberFormat from "react-number-format";
 import ResultMessage from "./ResultMessage";
 
-import {AgGridColumn, AgGridReact} from "ag-grid-react";
+import { AgGridColumn, AgGridReact } from "ag-grid-react";
 import "ag-grid-community";
 import "ag-grid-community/dist/styles/ag-grid.css";
 import "ag-grid-community/dist/styles/ag-theme-material.css";
@@ -162,18 +172,17 @@ export default function Produtos() {
             categoria_id: categoria,
             quantidade_estoque: estoque,
         };
-        console.log(_produto)
+        console.log(_produto);
 
-        axios.delete(`/produtos/${produto.id}`)
+        axios
+            .delete(`/produtos/${produto.id}`)
             .then((res) => {
                 setMessageText("Produto removido com sucesso!");
                 setMessageSeverity("success");
                 resetForm();
             })
             .catch((error) => {
-                setMessageText(
-                    "Erro ao remover dados do Produto no servidor."
-                );
+                setMessageText("Erro ao remover dados do Produto no servidor.");
                 setMessageSeverity("error");
                 console.log(error);
             })
@@ -229,7 +238,9 @@ export default function Produtos() {
                                     label="Origem"
                                     size="small"
                                     value={categoria}
-                                    onChange={(e) => setCategoria(e.target.value)}
+                                    onChange={(e) =>
+                                        setCategoria(e.target.value)
+                                    }
                                 >
                                     {categoriaList.map((_symbol) => (
                                         <MenuItem
@@ -255,6 +266,7 @@ export default function Produtos() {
                                                 minWidth: "80px",
                                             }}
                                             onClick={handleSendClick}
+                                            color="success"
                                             // type="submit"
                                         >
                                             Enviar
@@ -269,6 +281,7 @@ export default function Produtos() {
                                     >
                                         <Button
                                             variant="outlined"
+                                            color="success"
                                             style={{
                                                 maxWidth: "80px",
                                                 minWidth: "80px",
@@ -278,7 +291,10 @@ export default function Produtos() {
                                             Cancel
                                         </Button>
                                         {update && (
-                                            <IconButton aria-label="delete" onClick={handleDeleteClick}>
+                                            <IconButton
+                                                aria-label="delete"
+                                                onClick={handleDeleteClick}
+                                            >
                                                 <DeleteIcon />
                                             </IconButton>
                                         )}

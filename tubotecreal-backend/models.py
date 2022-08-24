@@ -26,15 +26,14 @@ class Categoria(Base):
 
 
 
-class Moeda(Base):
+class TipoPagamento(Base):
     """ Classe para representar a tabela `moeda` no banco de dados."""
-    __tablename__ = "moedas"
+    __tablename__ = "tipo_pagamento"
 
     id = Column(Integer, primary_key=True, index=True)
     descricao = Column(String(30), nullable=False)
-    simbolo = Column(String(5), nullable=False)
 
-    transacoes = relationship("Transacao", back_populates="moeda")
+    transacoes = relationship("Transacao", back_populates="pagamento")
 
 
 class Produto(Base):
@@ -77,10 +76,10 @@ class Transacao(Base):
     quantidade_produto = Column(Integer, nullable=False)
     pago = Column(Boolean, nullable=False)
 
-    moeda_id = Column(Integer, ForeignKey("moedas.id"))
+    tipo_pagamento_id = Column(Integer, ForeignKey("tipo_pagamento.id"))
     origem_id = Column(Integer, ForeignKey("tipo_origem_produto.id"))
     produto_id = Column(Integer, ForeignKey("produtos.id"))
 
     produto = relationship("Produto", back_populates="transacoes")
     origem = relationship("Origem", back_populates="transacoes")
-    moeda = relationship("Moeda", back_populates="transacoes")
+    pagamento = relationship("TipoPagamento", back_populates="transacoes")

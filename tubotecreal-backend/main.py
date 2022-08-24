@@ -6,7 +6,7 @@ from database import engine
 from models import Base
 Base.metadata.create_all(bind=engine)
 
-from routers import produtos, funcionarios, origens, categorias, moedas, transacoes
+from routers import produtos, funcionarios, origens, categorias, pagamentos, transacoes
 
 
 app = FastAPI()
@@ -27,7 +27,7 @@ app.add_middleware(
 
 app.include_router(categorias.router)
 app.include_router(funcionarios.router)
-app.include_router(moedas.router)
+app.include_router(pagamentos.router)
 app.include_router(produtos.router)
 app.include_router(origens.router)
 app.include_router(transacoes.router)

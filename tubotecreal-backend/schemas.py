@@ -23,13 +23,12 @@ class Categoria(OrigemBase):
     class Config:
         orm_mode = True
 
-class MoedaBase(BaseModel):
+class TipoPagamentoBase(BaseModel):
     """Classe base para representar moedas de transação. """
     id: int
     descricao: str
-    simbolo: str
 
-class Moeda(MoedaBase):
+class TipoPagamento(TipoPagamentoBase):
     """Classe para representar moedas de transação. """
     class Config:
         orm_mode = True
@@ -93,7 +92,7 @@ class TransacaoBase(BaseModel):
     data_transacao: date
     quantidade_produto: int
     pago: bool
-    moeda_id: int
+    tipo_pagamento_id: int
     origem_id: int
     produto_id: int
 
@@ -116,7 +115,7 @@ class Transacao(TransacaoBase):
     """ Classe para representar o modelo Financeiro completo."""
     id: int
 
-    moeda: Moeda
+    pagamento: TipoPagamento
     origem: Origem
     produto: Produto
 
