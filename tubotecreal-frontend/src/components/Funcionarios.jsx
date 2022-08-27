@@ -2,7 +2,8 @@ import React from "react";
 import {Box, Button, Grid, IconButton, Paper, Stack, TextField,} from "@mui/material";
 import DeleteIcon from "@mui/icons-material/Delete";
 import {DesktopDatePicker, LocalizationProvider} from "@mui/x-date-pickers/";
-import {AdapterDateFns} from "@mui/x-date-pickers/AdapterDateFns";
+import {AdapterMoment} from '@mui/x-date-pickers/AdapterMoment';
+
 import axios from "axios";
 import NumberFormat from "react-number-format";
 import {IMaskInput} from "react-imask";
@@ -14,15 +15,18 @@ import {AgGridColumn, AgGridReact} from "ag-grid-react";
 import "ag-grid-community";
 import "ag-grid-community/dist/styles/ag-grid.css";
 import "ag-grid-community/dist/styles/ag-theme-material.css";
-import ptBR from "date-fns/esm/locale/pt-BR/index.js";
 
+import 'moment/locale/pt-br';
 import UseWindowDimensions from "../hooks/UseWindowDimensions";
+
+
+const locale = 'pt-BR';
 
 const NumberFormatCustom = React.forwardRef(function NumberFormatCustom(
     props,
     ref
 ) {
-    const { onChange, ...other } = props;
+    const {onChange, ...other} = props;
 
     return (
         <NumberFormat
@@ -44,7 +48,7 @@ const NumberFormatCustom = React.forwardRef(function NumberFormatCustom(
 });
 
 const CpfMaskCustom = React.forwardRef(function CpfMaskCustom(props, ref) {
-    const { onChange, ...other } = props;
+    const {onChange, ...other} = props;
     return (
         <IMaskInput
             {...other}
@@ -55,7 +59,7 @@ const CpfMaskCustom = React.forwardRef(function CpfMaskCustom(props, ref) {
             }}
             inputRef={ref}
             onAccept={(value) =>
-                onChange({ target: { name: props.name, value } })
+                onChange({target: {name: props.name, value}})
             }
             overwrite
         />
@@ -68,7 +72,7 @@ CpfMaskCustom.propTypes = {
 };
 
 const TelMaskCustom = React.forwardRef(function TelMaskCustom(props, ref) {
-    const { onChange, ...other } = props;
+    const {onChange, ...other} = props;
     return (
         <IMaskInput
             {...other}
@@ -79,7 +83,7 @@ const TelMaskCustom = React.forwardRef(function TelMaskCustom(props, ref) {
             }}
             inputRef={ref}
             onAccept={(value) =>
-                onChange({ target: { name: props.name, value } })
+                onChange({target: {name: props.name, value}})
             }
             overwrite
         />
@@ -94,7 +98,7 @@ TelMaskCustom.propTypes = {
 export default function Funcionarios() {
     const gridRef = React.useRef();
 
-    const { height } = UseWindowDimensions();
+    const {height} = UseWindowDimensions();
     const [gridColumnApi, setGridColumnApi] = React.useState(null);
     const [gridApi, setGridApi] = React.useState(null);
 
@@ -104,7 +108,7 @@ export default function Funcionarios() {
         observacao: "",
         telefone: "",
         salario: "",
-        data_inicio: dateFormat(new Date(), "yyyy-mm-dd"),
+        data_inicio: dateFormat(new Date(), "yyyy-mm-dd", -3),
         data_desligamento: null,
     };
     const [funcionario, setFuncionario] = React.useState(funcionarioInicial);
@@ -161,7 +165,7 @@ export default function Funcionarios() {
         if (dataDesligamento === null) {
             dataDes = null;
         } else {
-            dataDes = dateFormat(dataDesligamento, "yyyy-mm-dd");
+            dataDes = dateFormat(dataDesligamento, "yyyy-mm-dd", -3);
         }
 
         const _funcionario = {
@@ -170,7 +174,7 @@ export default function Funcionarios() {
             observacao: observacao,
             telefone: telefone,
             salario: salario,
-            data_inicio: dateFormat(dataInicio, "yyyy-mm-dd"),
+            data_inicio: dateFormat(dataInicio, "yyyy-mm-dd", -3),
             data_desligamento: dataDes,
         };
         let request;
@@ -239,7 +243,8 @@ export default function Funcionarios() {
 
     function columnDateFormatter(params) {
         if (params.value === null) return "";
-        return dateFormat(params.value, "dd/mm/yyyy");
+        // console.log(params.value);
+        return dateFormat(params.value, "dd/mm/yyyy", -3);
     }
 
     function currencyFormatter(params) {
@@ -247,19 +252,17 @@ export default function Funcionarios() {
     }
 
     function formatNumber(number) {
-        // this puts commas into the number eg 1000 goes to 1,000,
-        // i pulled this from stack overflow, i have no idea how it works
         return Math.floor(number)
             .toString()
             .replace(/(\d)(?=(\d{3})+(?!\d))/g, "$1.");
     }
 
     return (
-        <main style={{ padding: "1rem 0" }}>
+        <main style={{padding: "1rem 0"}}>
             <h2>Funcionários</h2>
-            <Box sx={{ width: "100%" }}>
+            <Box sx={{width: "100%"}}>
                 <Stack spacing={2}>
-                    <main style={{ padding: "1rem 0" }}>
+                    <main style={{padding: "1rem 0"}}>
                         <Box component="form">
                             <Paper
                                 style={{
@@ -325,8 +328,8 @@ export default function Funcionarios() {
                                     value={salario}
                                 />
                                 <LocalizationProvider
-                                    dateAdapter={AdapterDateFns}
-                                    locale={ptBR}
+                                    dateAdapter={AdapterMoment}
+                                    locale={locale}
                                 >
                                     <DesktopDatePicker
                                         label="Data de Início"
@@ -338,8 +341,8 @@ export default function Funcionarios() {
                                     />
                                 </LocalizationProvider>
                                 <LocalizationProvider
-                                    dateAdapter={AdapterDateFns}
-                                    locale={ptBR}
+                                    dateAdapter={AdapterMoment}
+                                    locale={locale}
                                 >
                                     <DesktopDatePicker
                                         label="Data de Desligamento"
@@ -364,6 +367,7 @@ export default function Funcionarios() {
                                                 maxWidth: "80px",
                                                 minWidth: "80px",
                                             }}
+                                            color="success"
                                             onClick={handleSendClick}
                                             // type="submit"
                                         >
@@ -384,6 +388,7 @@ export default function Funcionarios() {
                                                 minWidth: "80px",
                                             }}
                                             onClick={handleCancelClick}
+                                            color="success"
                                         >
                                             Cancel
                                         </Button>
@@ -392,7 +397,7 @@ export default function Funcionarios() {
                                                 aria-label="delete"
                                                 onClick={handleDeleteClick}
                                             >
-                                                <DeleteIcon />
+                                                <DeleteIcon/>
                                             </IconButton>
                                         )}
                                     </Grid>
@@ -409,7 +414,7 @@ export default function Funcionarios() {
                             }}
                         />
                     </main>
-                    <div style={{ height: height * 0.75, width: "90%" }}>
+                    <div style={{height: height * 0.75, width: "90%"}}>
                         <AgGridReact
                             ref={gridRef}
                             rowData={listaFuncionarios}
@@ -425,11 +430,11 @@ export default function Funcionarios() {
                             rowSelection={"single"}
                             onSelectionChanged={onSelectionChanged}
                         >
-                            <AgGridColumn field="cpf" headerName="CPF" />
+                            <AgGridColumn field="cpf" headerName="CPF"/>
                             <AgGridColumn
                                 field="nome"
                                 headerName="Nome"
-                                cellStyle={{ textAlign: "left" }}
+                                cellStyle={{textAlign: "left"}}
                             />
                             <AgGridColumn
                                 field="observacao"

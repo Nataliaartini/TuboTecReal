@@ -1,5 +1,6 @@
+import json
 from datetime import date
-from typing import List
+
 from pydantic import BaseModel
 
 
@@ -8,31 +9,72 @@ class OrigemBase(BaseModel):
     id: int
     descricao: str
 
+
 class Origem(OrigemBase):
     """Classe para representar tipo de origem de produtos. """
+
     class Config:
         orm_mode = True
+
 
 class CategoriaBase(BaseModel):
     """Classe base para representar categoria de produtos. """
     id: int
     descricao: str
 
+
 class Categoria(OrigemBase):
     """Classe para representar categoria de produtos. """
+
     class Config:
         orm_mode = True
 
-class MoedaBase(BaseModel):
+
+class ArquivoBase(BaseModel):
+    """Classe base para representar arquivos. """
+    descricao: str
+
+
+class ArquivoNovo(ArquivoBase):
+    """Classe para representar arquivos novos. """
+    pass
+
+
+class ArquivoUpdate(ArquivoBase):
+    """Classe para representar arquivos novos. """
+    id: int
+
+
+class Arquivo(ArquivoNovo):
+    """Classe base para representar arquivos. """
+    id: int
+    localizacao: str
+    nome: str
+    tipo_midia: str
+
+    class Config:
+        orm_mode = True
+
+
+class Categoria(OrigemBase):
+    """Classe para representar categoria de produtos. """
+
+    class Config:
+        orm_mode = True
+
+
+class TipoPagamentoBase(BaseModel):
     """Classe base para representar moedas de transação. """
     id: int
     descricao: str
-    simbolo: str
 
-class Moeda(MoedaBase):
+
+class TipoPagamento(TipoPagamentoBase):
     """Classe para representar moedas de transação. """
+
     class Config:
         orm_mode = True
+
 
 class ProdutoBase(BaseModel):
     """ Classe para representar a base do modelo de Produto. """
@@ -54,6 +96,7 @@ class ProdutoUpdate(ProdutoBase):
     class Config:
         orm_mode = True
 
+
 class Produto(ProdutoBase):
     """ Classe para representar o modelo de Produto completo."""
     id: int
@@ -72,6 +115,7 @@ class FuncionarioBase(BaseModel):
     salario: float
     data_inicio: date
     data_desligamento: date | None = None
+
 
 class Funcionario(FuncionarioBase):
     """ Classe para representar o modelo de Funcionário para inserir. """
@@ -93,7 +137,7 @@ class TransacaoBase(BaseModel):
     data_transacao: date
     quantidade_produto: int
     pago: bool
-    moeda_id: int
+    tipo_pagamento_id: int
     origem_id: int
     produto_id: int
 
@@ -116,9 +160,10 @@ class Transacao(TransacaoBase):
     """ Classe para representar o modelo Financeiro completo."""
     id: int
 
-    moeda: Moeda
+    pagamento: TipoPagamento
     origem: Origem
     produto: Produto
+
 
     class Config:
         orm_mode = True

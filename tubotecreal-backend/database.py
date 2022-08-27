@@ -7,6 +7,7 @@ from sqlalchemy.orm import sessionmaker
 
 load_dotenv()
 
+
 def get_url():
     user = os.getenv("POSTGRES_USER", "postgres")
     password = os.getenv("POSTGRES_PASSWORD", "")
@@ -21,6 +22,7 @@ SessionLocal = sessionmaker(autocommit=False, autoflush=False, bind=engine)
 
 Base = declarative_base()
 
+
 # Dependency
 def get_db():
     db = SessionLocal()
@@ -28,4 +30,3 @@ def get_db():
         yield db
     finally:
         db.close()
-

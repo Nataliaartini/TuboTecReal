@@ -1,6 +1,5 @@
-from sqlalchemy import Boolean, Column, ForeignKey, Integer, String, Float, DateTime, Table
+from sqlalchemy import Boolean, Column, ForeignKey, Integer, String, Float, DateTime
 from sqlalchemy.orm import relationship
-from sqlalchemy.ext.associationproxy import association_proxy
 
 from database import Base
 
@@ -25,16 +24,25 @@ class Categoria(Base):
     produtos = relationship("Produto", back_populates="categoria")
 
 
+class Arquivo(Base):
+    """ Classe para representar a tabela `arquivos` no banco de dados."""
+    __tablename__ = "arquivos"
 
-class Moeda(Base):
+    id = Column(Integer, primary_key=True, index=True)
+    descricao = Column(String(100), nullable=False)
+    localizacao = Column(String(200), nullable=False)
+    nome = Column(String(200), nullable=False)
+    tipo_midia = Column(String(50), nullable=False)
+
+
+class TipoPagamento(Base):
     """ Classe para representar a tabela `moeda` no banco de dados."""
-    __tablename__ = "moedas"
+    __tablename__ = "tipo_pagamento"
 
     id = Column(Integer, primary_key=True, index=True)
     descricao = Column(String(30), nullable=False)
-    simbolo = Column(String(5), nullable=False)
 
-    transacoes = relationship("Transacao", back_populates="moeda")
+    transacoes = relationship("Transacao", back_populates="pagamento")
 
 
 class Produto(Base):
@@ -51,7 +59,6 @@ class Produto(Base):
     transacoes = relationship("Transacao", back_populates="produto")
 
 
-
 class Funcionario(Base):
     """ Classe para representar a tabela `funcionarios` no banco de dados."""
     __tablename__ = "funcionarios"
@@ -65,7 +72,6 @@ class Funcionario(Base):
     data_desligamento = Column(DateTime, nullable=True)
 
 
-
 class Transacao(Base):
     """ Classe para representar a tabela `funcionarios` no banco de dados."""
     __tablename__ = "transacoes"
@@ -77,10 +83,10 @@ class Transacao(Base):
     quantidade_produto = Column(Integer, nullable=False)
     pago = Column(Boolean, nullable=False)
 
-    moeda_id = Column(Integer, ForeignKey("moedas.id"))
+    tipo_pagamento_id = Column(Integer, ForeignKey("tipo_pagamento.id"))
     origem_id = Column(Integer, ForeignKey("tipo_origem_produto.id"))
     produto_id = Column(Integer, ForeignKey("produtos.id"))
 
     produto = relationship("Produto", back_populates="transacoes")
     origem = relationship("Origem", back_populates="transacoes")
-    moeda = relationship("Moeda", back_populates="transacoes")
+    pagamento = relationship("TipoPagamento", back_populates="transacoes")

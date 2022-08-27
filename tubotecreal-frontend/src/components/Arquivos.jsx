@@ -1,85 +1,55 @@
-import React from "react";
-import {Box, Button, Grid, IconButton, MenuItem, Paper, Select, Stack, TextField,} from "@mui/material";
-import DeleteIcon from "@mui/icons-material/Delete";
+import * as React from "react";
+import {
+    Box,
+    Button,
+    Grid,
+    IconButton,
+    Paper,
+    Stack, TextField,
+} from "@mui/material";
+import {DropzoneArea} from 'material-ui-dropzone';
 import axios from "axios";
-import NumberFormat from "react-number-format";
 import ResultMessage from "./ResultMessage";
-
 import {AgGridColumn, AgGridReact} from "ag-grid-react";
-import "ag-grid-community";
-import "ag-grid-community/dist/styles/ag-grid.css";
-import "ag-grid-community/dist/styles/ag-theme-material.css";
-
 import UseWindowDimensions from "../hooks/UseWindowDimensions";
+import DeleteIcon from "@mui/icons-material/Delete";
+import DownloadBtn from "./DownloadBtn";
 
-const NumberFormatCustom = React.forwardRef(function NumberFormatCustom(
-    props,
-    ref
-) {
-    const {onChange, ...other} = props;
 
-    return (
-        <NumberFormat
-            {...other}
-            getInputRef={ref}
-            onValueChange={(values) => {
-                onChange({
-                    target: {
-                        name: props.name,
-                        value: values.value,
-                    },
-                });
-            }}
-            thousandSeparator
-            isNumericString
-            prefix="R$ "
-        />
-    );
-});
-
-export default function Produtos() {
+export default function Arquivos() {
+    const dropzoneRef = React.useRef();
     const gridRef = React.useRef();
 
     const {height} = UseWindowDimensions();
     const [gridColumnApi, setGridColumnApi] = React.useState(null);
     const [gridApi, setGridApi] = React.useState(null);
 
-    const produtoInicial = {
+    const arquivoInicial = {
         descricao: "",
-        preco: 0,
-        categoria_id: "",
-        quantidade_estoque: 0,
-    };
-    const [produto, setProduto] = React.useState(produtoInicial);
+        localizacao: ""
+    }
 
-    const [categoriaList, setCategoriaList] = React.useState([]);
+    const [arquivo, setArquivo] = React.useState(arquivoInicial);
 
     const [messageText, setMessageText] = React.useState("");
     const [messageSeverity, setMessageSeverity] = React.useState("success");
     const [openMessage, setOpenMessage] = React.useState(false);
     const [update, setUpdate] = React.useState(false);
 
-    const [desc, setDesc] = React.useState(produto.descricao);
-    const [preco, setPreco] = React.useState(produto.preco);
-    const [estoque, setEstoque] = React.useState(produto.quantidade_estoque);
-    const [categoria, setCategoria] = React.useState(produto.categoria_id);
-
-    const [listaProdutos, setListaProdutos] = React.useState(null);
+    const [listaArquivos, setListaArquivos] = React.useState("");
+    const dropzoneLabelInicial = "Arraste o arquivo aqui ou clique para selecionar";
+    const [dropzoneLabel, setDropzoneLabel] = React.useState(dropzoneLabelInicial);
+    const [fileUpload, setFileUpload] = React.useState([]);
+    const [resetDropZone, setResetDropZone] = React.useState(false);
+    const [desc, setDesc] = React.useState("");
 
     React.useEffect(() => {
-        const origensRequest = axios.get("/categorias/all/");
-        origensRequest.then((res) => {
-            setCategoriaList(res.data);
+        const arquivosRequest = axios.get("/arquivos/all/");
+        arquivosRequest.then((res) => {
+            setListaArquivos(res.data);
         });
-        const produtosRequest = axios.get("/produtos/all/");
-        produtosRequest.then((res) => {
-            setListaProdutos(res.data);
-        });
-        setDesc(produto.descricao);
-        setPreco(produto.preco);
-        setEstoque(produto.quantidade_estoque);
-        setCategoria(produto.categoria_id);
-    }, [produto]);
+        setDesc(arquivo.descricao);
+    }, [arquivo]);
 
     const onSelectionChanged = React.useCallback(() => {
         const selectedRow = gridRef.current.api.getSelectedRows();
@@ -92,32 +62,40 @@ export default function Produtos() {
         setGridApi(params.api);
     }
 
-    function processLineSelection(selectedProd) {
+    function processLineSelection(selectedArquivo) {
         // setProduto(selectedProd);
-        setProduto({
-            id: selectedProd.id,
-            descricao: selectedProd.descricao,
-            preco: selectedProd.preco,
-            categoria_id: selectedProd.categoria_id,
-            quantidade_estoque: selectedProd.quantidade_estoque,
+        setArquivo({
+            id: selectedArquivo.id,
+            descricao: selectedArquivo.descricao,
         });
+        setDropzoneLabel("Upload de arquivo desabilitado para edição.");
     }
 
     function handleSendClick() {
-        const _produto = {
-            descricao: desc,
-            preco: preco,
-            categoria_id: categoria,
-            quantidade_estoque: estoque,
-        };
-        let request;
+        const form = new FormData();
+        form.append('upload', fileUpload[0]);
 
-        if (update === false) {
-            request = axios.post("/produtos/", _produto);
+        let request;
+        if (update === true) {
+            console.log(arquivo);
+            request = axios.put("/arquivos/", {
+                id: arquivo.id,
+                descricao: desc
+            });
         } else {
-            const updatedProd = _produto;
-            updatedProd.id = produto.id;
-            request = axios.put("/produtos/", updatedProd);
+            request = axios.post(
+                '/arquivos/',
+                form,
+                {
+                    params: {
+                        'descricao': desc,
+                    },
+                    headers: {
+
+                        'Content-Type': 'multipart/form-data'
+                    }
+                }
+            );
         }
 
         request
@@ -128,7 +106,7 @@ export default function Produtos() {
             })
             .catch((error) => {
                 setMessageText(
-                    error.response.data.detail
+                    "Erro ao enviar dados do Arquivo para o servidor."
                 );
                 setMessageSeverity("error");
                 console.log(error);
@@ -136,45 +114,36 @@ export default function Produtos() {
             .finally(() => {
                 setOpenMessage(true);
             });
-    }
 
-    function resetForm() {
-        setDesc("");
-        setPreco(0);
-        setCategoria(1);
-        setEstoque(0);
-        setUpdate(false);
-        setProduto(produtoInicial);
     }
 
     function handleCancelClick() {
         resetForm();
         setOpenMessage(true);
-        setMessageText("Cadastrado cancelado!");
+        setMessageText("Cadastrado de arquivo cancelado!");
         setMessageSeverity("warning");
     }
 
-    function handleDeleteClick() {
-        const _produto = {
-            id: produto.id,
-            descricao: desc,
-            preco: preco,
-            categoria_id: categoria,
-            quantidade_estoque: estoque,
-        };
-        console.log(_produto);
+    function resetForm() {
+        setDesc("");
+        setUpdate(false);
+        setArquivo(arquivoInicial);
+        setDropzoneLabel(dropzoneLabelInicial);
+        setFileUpload([]);
+        setResetDropZone(!resetDropZone);
+    }
 
+
+    function handleDeleteClick() {
         axios
-            .delete(`/produtos/${produto.id}`)
+            .delete(`/arquivos/${arquivo.id}`)
             .then((res) => {
-                setMessageText("Produto removido com sucesso!");
+                setMessageText("Arquivo removido com sucesso!");
                 setMessageSeverity("success");
                 resetForm();
             })
             .catch((error) => {
-                setMessageText(
-                    error.response.data.detail
-                );
+                setMessageText("Erro ao remover dados do Arquivo no servidor.");
                 setMessageSeverity("error");
                 console.log(error);
             })
@@ -185,7 +154,7 @@ export default function Produtos() {
 
     return (
         <main style={{padding: "1rem 0"}}>
-            <h2>Produtos</h2>
+            <h2>Arquivos</h2>
             <Box sx={{width: "100%"}}>
                 <Stack spacing={2}>
                     <main style={{padding: "1rem 0"}}>
@@ -206,43 +175,17 @@ export default function Produtos() {
                                     onChange={(e) => setDesc(e.target.value)}
                                     value={desc}
                                 />
-                                <TextField
-                                    required
-                                    id="preco-input"
-                                    label="Preço"
-                                    size="small"
-                                    onChange={(e) => setPreco(e.target.value)}
-                                    InputProps={{
-                                        inputComponent: NumberFormatCustom,
-                                    }}
-                                    value={preco}
+
+                                <DropzoneArea
+                                    ref={dropzoneRef}
+                                    key={resetDropZone}
+                                    onChange={(files) => setFileUpload(files)}
+                                    filesLimit={1}
+                                    dropzoneProps={{disabled: update}}
+                                    showFileNames
+                                    dropzoneText={dropzoneLabel}
                                 />
-                                <TextField
-                                    required
-                                    id="qtd-input"
-                                    label="Quantidade Estoque"
-                                    size="small"
-                                    onChange={(e) => setEstoque(e.target.value)}
-                                    value={estoque}
-                                />
-                                <Select
-                                    id="select-origem"
-                                    label="Origem"
-                                    size="small"
-                                    value={categoria}
-                                    onChange={(e) =>
-                                        setCategoria(e.target.value)
-                                    }
-                                >
-                                    {categoriaList.map((_symbol) => (
-                                        <MenuItem
-                                            value={_symbol.id}
-                                            key={_symbol.id}
-                                        >
-                                            {_symbol.descricao}
-                                        </MenuItem>
-                                    ))}
-                                </Select>
+
                                 <Grid container spacing={2}>
                                     <Grid
                                         xs
@@ -257,8 +200,8 @@ export default function Produtos() {
                                                 maxWidth: "80px",
                                                 minWidth: "80px",
                                             }}
-                                            onClick={handleSendClick}
                                             color="success"
+                                            onClick={handleSendClick}
                                             // type="submit"
                                         >
                                             Enviar
@@ -304,10 +247,14 @@ export default function Produtos() {
                             }}
                         />
                     </main>
-                    <div style={{height: height * 0.75, width: "90%"}}>
+                    <div style={{
+                        height: height * 0.75, width: "60%", display: "block",
+                        marginLeft: "auto",
+                        marginRight: "auto"
+                    }}>
                         <AgGridReact
                             ref={gridRef}
-                            rowData={listaProdutos}
+                            rowData={listaArquivos}
                             defaultColDef={{
                                 flex: 1,
                                 minWidth: 20,
@@ -322,24 +269,35 @@ export default function Produtos() {
                         >
                             <AgGridColumn
                                 field="id"
-                                headerName="Cód. Produto"
+                                headerName="ID"
                             />
                             <AgGridColumn
                                 field="descricao"
                                 headerName="Descrição"
                                 cellStyle={{textAlign: "left"}}
                             />
-                            <AgGridColumn field="preco" headerName="Preço"/>
                             <AgGridColumn
-                                field="categoria.descricao"
-                                headerName="Categoria"
+                                field="tipo_midia"
+                                headerName="Tipo"
+                                cellStyle={{textAlign: "left"}}
                             />
                             <AgGridColumn
-                                field="quantidade_estoque"
-                                headerName="Estoque"
+                                field=""
+                                headerName="Download"
+                                cellRenderer={DownloadBtn}
+                                cellRendererParams={{
+                                    openMessage: setOpenMessage,
+                                    messageText: setMessageText,
+                                    messageSeverity: setMessageSeverity
+                                }}
+                                openMessage={setOpenMessage}
+                                messageText={setMessageText}
+                                messageSeverity={setMessageSeverity}
                             />
+
                         </AgGridReact>
                     </div>
+
                 </Stack>
             </Box>
         </main>
