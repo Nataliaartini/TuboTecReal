@@ -9,5 +9,4 @@ Projeto integrador das matérias: banco de dados I, Engenharia de Software I, e 
 <hr>
 <h3>Protótipos das principais telas desenvolvidas:</h3>
 ![prototipofunc](https://user-images.githubusercontent.com/79176834/187051451-93a6e9cf-9145-43e6-8300-05ecf2a7aeab.png)
-![prototipofinanceiro](https://user-images.githubusercontent.com/79176834/187051511-118ad3e1-c592-48b1-8fd0-8700475e03ef.png)
-![prototipoprod](https://user-images.githubusercontent.com/79176834/187051512-e13320b2-d5c7-42ea-ad26-0d76b842f962.png)
+
