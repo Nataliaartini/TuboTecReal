@@ -1,4 +1,4 @@
- import React from "react";
+import React from "react";
 import {Box, Button, Grid, IconButton, MenuItem, Paper, Select, Stack, TextField,} from "@mui/material";
 import DeleteIcon from "@mui/icons-material/Delete";
 import axios from "axios";
@@ -16,7 +16,7 @@ const NumberFormatCustom = React.forwardRef(function NumberFormatCustom(
     props,
     ref
 ) {
-    const { onChange, ...other } = props;
+    const {onChange, ...other} = props;
 
     return (
         <NumberFormat
@@ -40,7 +40,7 @@ const NumberFormatCustom = React.forwardRef(function NumberFormatCustom(
 export default function Produtos() {
     const gridRef = React.useRef();
 
-    const { height } = UseWindowDimensions();
+    const {height} = UseWindowDimensions();
     const [gridColumnApi, setGridColumnApi] = React.useState(null);
     const [gridApi, setGridApi] = React.useState(null);
 
@@ -128,7 +128,7 @@ export default function Produtos() {
             })
             .catch((error) => {
                 setMessageText(
-                    "Erro ao enviar dados do Produto para o servidor."
+                    error.response.data.detail
                 );
                 setMessageSeverity("error");
                 console.log(error);
@@ -162,9 +162,10 @@ export default function Produtos() {
             categoria_id: categoria,
             quantidade_estoque: estoque,
         };
-        console.log(_produto)
+        console.log(_produto);
 
-        axios.delete(`/produtos/${produto.id}`)
+        axios
+            .delete(`/produtos/${produto.id}`)
             .then((res) => {
                 setMessageText("Produto removido com sucesso!");
                 setMessageSeverity("success");
@@ -172,7 +173,7 @@ export default function Produtos() {
             })
             .catch((error) => {
                 setMessageText(
-                    "Erro ao remover dados do Produto no servidor."
+                    error.response.data.detail
                 );
                 setMessageSeverity("error");
                 console.log(error);
@@ -183,11 +184,11 @@ export default function Produtos() {
     }
 
     return (
-        <main style={{ padding: "1rem 0" }}>
+        <main style={{padding: "1rem 0"}}>
             <h2>Produtos</h2>
-            <Box sx={{ width: "100%" }}>
+            <Box sx={{width: "100%"}}>
                 <Stack spacing={2}>
-                    <main style={{ padding: "1rem 0" }}>
+                    <main style={{padding: "1rem 0"}}>
                         <Box component="form">
                             <Paper
                                 style={{
@@ -229,7 +230,9 @@ export default function Produtos() {
                                     label="Origem"
                                     size="small"
                                     value={categoria}
-                                    onChange={(e) => setCategoria(e.target.value)}
+                                    onChange={(e) =>
+                                        setCategoria(e.target.value)
+                                    }
                                 >
                                     {categoriaList.map((_symbol) => (
                                         <MenuItem
@@ -255,6 +258,7 @@ export default function Produtos() {
                                                 minWidth: "80px",
                                             }}
                                             onClick={handleSendClick}
+                                            color="success"
                                             // type="submit"
                                         >
                                             Enviar
@@ -269,6 +273,7 @@ export default function Produtos() {
                                     >
                                         <Button
                                             variant="outlined"
+                                            color="success"
                                             style={{
                                                 maxWidth: "80px",
                                                 minWidth: "80px",
@@ -278,8 +283,11 @@ export default function Produtos() {
                                             Cancel
                                         </Button>
                                         {update && (
-                                            <IconButton aria-label="delete" onClick={handleDeleteClick}>
-                                                <DeleteIcon />
+                                            <IconButton
+                                                aria-label="delete"
+                                                onClick={handleDeleteClick}
+                                            >
+                                                <DeleteIcon/>
                                             </IconButton>
                                         )}
                                     </Grid>
@@ -296,7 +304,7 @@ export default function Produtos() {
                             }}
                         />
                     </main>
-                    <div style={{ height: height * 0.75, width: "90%" }}>
+                    <div style={{height: height * 0.75, width: "90%"}}>
                         <AgGridReact
                             ref={gridRef}
                             rowData={listaProdutos}
@@ -319,9 +327,9 @@ export default function Produtos() {
                             <AgGridColumn
                                 field="descricao"
                                 headerName="Descrição"
-                                cellStyle={{ textAlign: "left" }}
+                                cellStyle={{textAlign: "left"}}
                             />
-                            <AgGridColumn field="preco" headerName="Preço" />
+                            <AgGridColumn field="preco" headerName="Preço"/>
                             <AgGridColumn
                                 field="categoria.descricao"
                                 headerName="Categoria"

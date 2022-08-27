@@ -18,7 +18,7 @@ import UseWindowDimensions from "../hooks/UseWindowDimensions";
 export default function Financeiro() {
     const gridRef = React.useRef();
 
-    const { height } = UseWindowDimensions();
+    const {height} = UseWindowDimensions();
     const [gridColumnApi, setGridColumnApi] = React.useState(null);
     const [gridApi, setGridApi] = React.useState(null);
 
@@ -27,7 +27,7 @@ export default function Financeiro() {
         data_transacao: dateFormat(new Date(), "yyyy-mm-dd"),
         quantidade_produto: 0,
         pago: false,
-        moeda_id: "",
+        tipo_pagamento_id: "",
         origem_id: "",
         produto_id: "",
     };
@@ -51,13 +51,18 @@ export default function Financeiro() {
         transacao.quantidade_produto
     );
     const [pago, setPago] = React.useState(transacao.pago);
-    const [moeda, setMoeda] = React.useState(transacao.moeda_id);
+    const [tipoPagamento, setTipoPagamento] = React.useState(
+        transacao.tipo_pagamento_id
+    );
     const [origem, setOrigem] = React.useState(transacao.origem_id);
     const [produto, setProduto] = React.useState(transacao.produto_id);
     const [totalTransacoes, setTotalTransacoes] = React.useState(0.0);
+    const [totalTransacoesEntrada, setTotalTransacoesEntrada] =
+        React.useState(0.0);
+    const [totalTransacoesSaida, setTotalTransacoesSaida] = React.useState(0.0);
 
     React.useEffect(() => {
-        const moedasRequest = axios.get("/moedas/all/");
+        const moedasRequest = axios.get("/pagamentos/all/");
         moedasRequest.then((res) => {
             setListaMoedas(res.data);
         });
@@ -71,20 +76,38 @@ export default function Financeiro() {
         });
         const transacaoesRequest = axios.get("/transacoes/all/");
         transacaoesRequest.then((res) => {
-          setListaTransacoes(res.data);
-          let total = 0.0;
-          for (let transacao of res.data){
-            total = total + (transacao.quantidade_produto * transacao.produto.preco);
-          }
-          setTotalTransacoes(total);
-      });
-      setDesc(transacao.descricao);
-      setDataTransacao(transacao.data_transacao);
-      setQuantidade(transacao.quantidade_produto);
-      setPago(transacao.pago);
-      setMoeda(transacao.moeda_id);
-      setOrigem(transacao.origem_id);
-      setProduto(transacao.produto_id);
+            setListaTransacoes(res.data);
+            let total = 0.0;
+            let totalEntrada = 0.0;
+            let totalSaida = 0.0;
+            for (let transacao of res.data) {
+                total =
+                    total +
+                    transacao.quantidade_produto * transacao.produto.preco;
+                if (transacao.origem.id === 2) {
+                    totalEntrada =
+                        totalEntrada +
+                        transacao.quantidade_produto * transacao.produto.preco;
+                } else {
+                    if (transacao.origem.id === 1) {
+                        totalSaida =
+                            totalSaida +
+                            transacao.quantidade_produto *
+                            transacao.produto.preco;
+                    }
+                }
+            }
+            setTotalTransacoes(total);
+            setTotalTransacoesEntrada(totalEntrada);
+            setTotalTransacoesSaida(totalSaida);
+        });
+        setDesc(transacao.descricao);
+        setDataTransacao(transacao.data_transacao);
+        setQuantidade(transacao.quantidade_produto);
+        setPago(transacao.pago);
+        setTipoPagamento(transacao.tipo_pagamento_id);
+        setOrigem(transacao.origem_id);
+        setProduto(transacao.produto_id);
     }, [transacao]);
 
     const onSelectionChanged = React.useCallback(() => {
@@ -106,7 +129,7 @@ export default function Financeiro() {
             data_transacao: selectedTrans.data_transacao,
             quantidade_produto: selectedTrans.quantidade_produto,
             pago: selectedTrans.pago,
-            moeda_id: selectedTrans.moeda_id,
+            tipo_pagamento_id: selectedTrans.tipo_pagamento_id,
             origem_id: selectedTrans.origem_id,
             produto_id: selectedTrans.produto_id,
         });
@@ -118,18 +141,19 @@ export default function Financeiro() {
             data_transacao: dataTransacao,
             quantidade_produto: quantidade,
             pago: pago,
-            moeda_id: moeda,
+            tipo_pagamento_id: tipoPagamento,
             origem_id: origem,
             produto_id: produto,
         };
         let request;
+        console.log(_transacao);
 
         if (update === false) {
             request = axios.post("/transacoes/", _transacao);
         } else {
-            const updatedProd = _transacao;
-            updatedProd.id = transacao.id;
-            request = axios.put("/transacoes/", updatedProd);
+            const updatedTrans = _transacao;
+            updatedTrans.id = transacao.id;
+            request = axios.put("/transacoes/", updatedTrans);
         }
 
         request
@@ -155,7 +179,7 @@ export default function Financeiro() {
         setDataTransacao(dateFormat(new Date(), "yyyy-mm-dd"));
         setQuantidade(0);
         setPago(false);
-        setMoeda("");
+        setTipoPagamento("");
         setOrigem("");
         setProduto("");
         setTransacao(transacaoInicial);
@@ -170,16 +194,6 @@ export default function Financeiro() {
     }
 
     function handleDeleteClick() {
-        const _transacao = {
-            descricao: desc,
-            data_transacao: dataTransacao,
-            quantidade_produto: quantidade,
-            pago: pago,
-            moeda_id: moeda,
-            origem_id: origem,
-            produto_id: produto,
-        };
-
         axios
             .delete(`/transacoes/${transacao.id}`)
             .then((res) => {
@@ -188,7 +202,9 @@ export default function Financeiro() {
                 resetForm();
             })
             .catch((error) => {
-                setMessageText("Erro ao remover dados da Transação no servidor.");
+                setMessageText(
+                    "Erro ao remover dados da Transação no servidor."
+                );
                 setMessageSeverity("error");
                 console.log(error);
             })
@@ -208,11 +224,11 @@ export default function Financeiro() {
     }
 
     return (
-        <main style={{ padding: "1rem 0" }}>
+        <main style={{padding: "1rem 0"}}>
             <h2>Financeiro</h2>
-            <Box sx={{ width: "100%" }}>
+            <Box sx={{width: "100%"}}>
                 <Stack spacing={2}>
-                    <main style={{ padding: "1rem 0" }}>
+                    <main style={{padding: "1rem 0"}}>
                         <Box component="form">
                             <Paper
                                 style={{
@@ -257,10 +273,12 @@ export default function Financeiro() {
 
                                 <Select
                                     id="select-moeda"
-                                    label="Moeda"
+                                    label="Tipo de Pagamento"
                                     size="small"
-                                    value={moeda}
-                                    onChange={(e) => setMoeda(e.target.value)}
+                                    value={tipoPagamento}
+                                    onChange={(e) =>
+                                        setTipoPagamento(e.target.value)
+                                    }
                                 >
                                     {listaMoedas.map((_symbol) => (
                                         <MenuItem
@@ -276,6 +294,7 @@ export default function Financeiro() {
                                     label="Origem"
                                     size="small"
                                     value={origem}
+                                    inputProps={{readOnly: update}}
                                     onChange={(e) => setOrigem(e.target.value)}
                                 >
                                     {listaOrigens.map((_symbol) => (
@@ -319,6 +338,7 @@ export default function Financeiro() {
                                                 minWidth: "80px",
                                             }}
                                             onClick={handleSendClick}
+                                            color="success"
                                             // type="submit"
                                         >
                                             Enviar
@@ -338,6 +358,7 @@ export default function Financeiro() {
                                                 minWidth: "80px",
                                             }}
                                             onClick={handleCancelClick}
+                                            color="success"
                                         >
                                             Cancel
                                         </Button>
@@ -346,7 +367,7 @@ export default function Financeiro() {
                                                 aria-label="delete"
                                                 onClick={handleDeleteClick}
                                             >
-                                                <DeleteIcon />
+                                                <DeleteIcon/>
                                             </IconButton>
                                         )}
                                     </Grid>
@@ -363,12 +384,16 @@ export default function Financeiro() {
                             }}
                         />
                     </main>
-                    <div style={{ width: "90%" }}>
-                      <Typography variant="h5">
-                        Total de transações em R$: {totalTransacoes}
-                      </Typography>
+                    <div style={{width: "90%"}}>
+                        <Typography variant="body1">
+                            Total de transações em R$: {totalTransacoes}
+                        </Typography>
+                        <Typography variant="body2">
+                            Total de entradas em R$: {totalTransacoesEntrada} |
+                            Total de saídas em R$: {totalTransacoesSaida}
+                        </Typography>
                     </div>
-                    <div style={{ height: height * 0.75, width: "90%" }}>
+                    <div style={{height: height * 0.75, width: "90%"}}>
                         <AgGridReact
                             ref={gridRef}
                             rowData={listaTransacoes}
@@ -391,7 +416,7 @@ export default function Financeiro() {
                             <AgGridColumn
                                 field="descricao"
                                 headerName="Descrição"
-                                cellStyle={{ textAlign: "left" }}
+                                cellStyle={{textAlign: "left"}}
                             />
                             <AgGridColumn
                                 field="quantidade_produto"
@@ -408,7 +433,7 @@ export default function Financeiro() {
                                 valueFormatter={columnPagoFormatter}
                             />
                             <AgGridColumn
-                                field="moeda.descricao"
+                                field="pagamento.descricao"
                                 headerName="Moeda"
                             />
                             <AgGridColumn

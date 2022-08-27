@@ -3,7 +3,7 @@ import React from "react";
 import {Alert, Button, IconButton, Snackbar,} from "@mui/material";
 import CloseIcon from "@mui/icons-material/Close";
 
-export default function ResultMessage(props){
+export default function ResultMessage(props) {
 
     const action = (
         <React.Fragment>
@@ -16,7 +16,7 @@ export default function ResultMessage(props){
                 color="inherit"
                 onClick={props.onClose}
             >
-                <CloseIcon fontSize="small" />
+                <CloseIcon fontSize="small"/>
             </IconButton>
         </React.Fragment>
     );
@@ -33,7 +33,7 @@ export default function ResultMessage(props){
                 <Alert
                     onClose={props.onClose}
                     severity={props.severity}
-                    sx={{ width: "100%" }}
+                    sx={{width: "100%"}}
                 >
                     {props.message}
                 </Alert>

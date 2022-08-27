@@ -1,9 +1,8 @@
-from fastapi import APIRouter, Depends
-from sqlalchemy.orm import Session
-from database import get_db
-
 import schemas
+from database import get_db
+from fastapi import APIRouter, Depends
 from services import produtos
+from sqlalchemy.orm import Session
 
 router = APIRouter(
     prefix="/api/produtos",
@@ -16,30 +15,30 @@ router = APIRouter(
 
 @router.post("/", response_model=schemas.Produto)
 async def criar_produto(
-    produto: schemas.ProdutoNovo,
-    db: Session = Depends(get_db)):
+        produto: schemas.ProdutoNovo,
+        db: Session = Depends(get_db)):
     return produtos.insere_produto(db=db, produto=produto)
 
 
 @router.put("/", response_model=schemas.ProdutoUpdate)
 async def atualizar_produto(
-    produto: schemas.ProdutoUpdate,
-    db: Session = Depends(get_db)):
+        produto: schemas.ProdutoUpdate,
+        db: Session = Depends(get_db)):
     return produtos.atualiza_produto(db=db, produto=produto)
 
 
 @router.delete("/{produto}")
 async def remover_produto(
-    produto: int,
-    db: Session = Depends(get_db)):
+        produto: int,
+        db: Session = Depends(get_db)):
     return produtos.remove_produto(db=db, produto_id=produto)
 
 
 @router.get("/all/", response_model=list[schemas.Produto])
 def lista_produtos(
-    skip: int = 0,
-    limit: int = 100,
-    db: Session = Depends(get_db)):
+        skip: int = 0,
+        limit: int = 100,
+        db: Session = Depends(get_db)):
     all_produtos = produtos.busca_todos_produtos(db, skip=skip, limit=limit)
     return all_produtos
 
