@@ -3,10 +3,10 @@ from fastapi.middleware.cors import CORSMiddleware
 
 from database import engine
 from models import Base
+from routers import produtos, funcionarios, origens, categorias, pagamentos, transacoes, arquivos
 
 Base.metadata.create_all(bind=engine)
 
-from routers import produtos, funcionarios, origens, categorias, pagamentos, transacoes
 
 app = FastAPI()
 
@@ -23,6 +23,7 @@ app.add_middleware(
     allow_headers=["*"],
 )
 
+app.include_router(arquivos.router)
 app.include_router(categorias.router)
 app.include_router(funcionarios.router)
 app.include_router(pagamentos.router)

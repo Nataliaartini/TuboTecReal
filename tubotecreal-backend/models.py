@@ -24,6 +24,17 @@ class Categoria(Base):
     produtos = relationship("Produto", back_populates="categoria")
 
 
+class Arquivo(Base):
+    """ Classe para representar a tabela `arquivos` no banco de dados."""
+    __tablename__ = "arquivos"
+
+    id = Column(Integer, primary_key=True, index=True)
+    descricao = Column(String(100), nullable=False)
+    localizacao = Column(String(200), nullable=False)
+    nome = Column(String(200), nullable=False)
+    tipo_midia = Column(String(50), nullable=False)
+
+
 class TipoPagamento(Base):
     """ Classe para representar a tabela `moeda` no banco de dados."""
     __tablename__ = "tipo_pagamento"

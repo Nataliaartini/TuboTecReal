@@ -4,41 +4,11 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="df612ec7-5906-4f8e-bcdb-d4833931dc5a" name="Changes" comment="">
+    <list default="true" id="df612ec7-5906-4f8e-bcdb-d4833931dc5a" name="Changes" comment="Adicionadas novas funcionalidades de arquivos.">
+      <change afterPath="$PROJECT_DIR$/tubotecreal-backend/files/Tutorial.pdf" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/tubotecreal-backend/files/Tutorialv3.pdf" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/TuboTecReal.iml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/TuboTecReal.iml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/tubotecreal-backend/banco.sql" beforeDir="false" afterPath="$PROJECT_DIR$/tubotecreal-backend/banco.sql" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/tubotecreal-backend/database.py" beforeDir="false" afterPath="$PROJECT_DIR$/tubotecreal-backend/database.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/tubotecreal-backend/main.py" beforeDir="false" afterPath="$PROJECT_DIR$/tubotecreal-backend/main.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/tubotecreal-backend/models.py" beforeDir="false" afterPath="$PROJECT_DIR$/tubotecreal-backend/models.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/tubotecreal-backend/routers/categorias.py" beforeDir="false" afterPath="$PROJECT_DIR$/tubotecreal-backend/routers/categorias.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/tubotecreal-backend/routers/funcionarios.py" beforeDir="false" afterPath="$PROJECT_DIR$/tubotecreal-backend/routers/funcionarios.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/tubotecreal-backend/routers/origens.py" beforeDir="false" afterPath="$PROJECT_DIR$/tubotecreal-backend/routers/origens.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/tubotecreal-backend/routers/pagamentos.py" beforeDir="false" afterPath="$PROJECT_DIR$/tubotecreal-backend/routers/pagamentos.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/tubotecreal-backend/routers/produtos.py" beforeDir="false" afterPath="$PROJECT_DIR$/tubotecreal-backend/routers/produtos.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/tubotecreal-backend/routers/transacoes.py" beforeDir="false" afterPath="$PROJECT_DIR$/tubotecreal-backend/routers/transacoes.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/tubotecreal-backend/schemas.py" beforeDir="false" afterPath="$PROJECT_DIR$/tubotecreal-backend/schemas.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/tubotecreal-backend/services/categorias.py" beforeDir="false" afterPath="$PROJECT_DIR$/tubotecreal-backend/services/categorias.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/tubotecreal-backend/services/funcionarios.py" beforeDir="false" afterPath="$PROJECT_DIR$/tubotecreal-backend/services/funcionarios.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/tubotecreal-backend/services/origens.py" beforeDir="false" afterPath="$PROJECT_DIR$/tubotecreal-backend/services/origens.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/tubotecreal-backend/services/pagamentos.py" beforeDir="false" afterPath="$PROJECT_DIR$/tubotecreal-backend/services/pagamentos.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/tubotecreal-backend/services/produtos.py" beforeDir="false" afterPath="$PROJECT_DIR$/tubotecreal-backend/services/produtos.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/tubotecreal-backend/services/transacoes.py" beforeDir="false" afterPath="$PROJECT_DIR$/tubotecreal-backend/services/transacoes.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/tubotecreal-frontend/README.md" beforeDir="false" afterPath="$PROJECT_DIR$/tubotecreal-frontend/README.md" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/tubotecreal-frontend/public/index.html" beforeDir="false" afterPath="$PROJECT_DIR$/tubotecreal-frontend/public/index.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/tubotecreal-frontend/src/components/App.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/tubotecreal-frontend/src/components/App.jsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/tubotecreal-frontend/src/components/DrawerHeader.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/tubotecreal-frontend/src/components/DrawerHeader.jsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/tubotecreal-frontend/src/components/Financeiro.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/tubotecreal-frontend/src/components/Financeiro.jsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/tubotecreal-frontend/src/components/Funcionarios.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/tubotecreal-frontend/src/components/Funcionarios.jsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/tubotecreal-frontend/src/components/MenuLateral.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/tubotecreal-frontend/src/components/MenuLateral.jsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/tubotecreal-frontend/src/components/Produtos.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/tubotecreal-frontend/src/components/Produtos.jsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/tubotecreal-frontend/src/components/ResultMessage.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/tubotecreal-frontend/src/components/ResultMessage.jsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/tubotecreal-frontend/src/css/App.css" beforeDir="false" afterPath="$PROJECT_DIR$/tubotecreal-frontend/src/css/App.css" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/tubotecreal-frontend/src/hooks/UseWindowDimensions.js" beforeDir="false" afterPath="$PROJECT_DIR$/tubotecreal-frontend/src/hooks/UseWindowDimensions.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/tubotecreal-frontend/src/index.css" beforeDir="false" afterPath="$PROJECT_DIR$/tubotecreal-frontend/src/index.css" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/tubotecreal-frontend/src/index.js" beforeDir="false" afterPath="$PROJECT_DIR$/tubotecreal-frontend/src/index.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/tubotecreal-frontend/src/logo.svg" beforeDir="false" afterPath="$PROJECT_DIR$/tubotecreal-frontend/src/logo.svg" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/tubotecreal-frontend/src/utils/menuItems.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/tubotecreal-frontend/src/utils/menuItems.jsx" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -51,6 +21,9 @@
   <component name="MarkdownSettingsMigration">
     <option name="stateVersion" value="1" />
   </component>
+  <component name="ProblemsViewState">
+    <option name="selectedTabId" value="CurrentFile" />
+  </component>
   <component name="ProjectId" id="2DjDepo1VKeXu2keWqEVcjgsSm8" />
   <component name="ProjectLevelVcsManager">
     <ConfirmationsSetting value="2" id="Add" />
@@ -59,24 +32,41 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent"><![CDATA[{
-  "keyToString": {
-    "WebServerToolWindowFactoryState": "false",
-    "last_opened_file_path": "C:/Users/natal/Documents/cursos/TuboTecReal/tubotecreal-backend",
-    "node.js.detected.package.eslint": "true",
-    "node.js.detected.package.tslint": "true",
-    "node.js.selected.package.eslint": "(autodetect)",
-    "node.js.selected.package.tslint": "(autodetect)",
-    "nodejs_package_manager_path": "npm",
-    "settings.editor.selected.configurable": "preferences.lookFeel"
+  <component name="PropertiesComponent">{
+  &quot;keyToString&quot;: {
+    &quot;RunOnceActivity.OpenProjectViewOnStart&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
+    &quot;ToolWindowSciView.ShowToolbar&quot;: &quot;false&quot;,
+    &quot;WebServerToolWindowFactoryState&quot;: &quot;false&quot;,
+    &quot;last_opened_file_path&quot;: &quot;/Users/gian/PyCharmProjects/TuboTecReal&quot;,
+    &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
+    &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
+    &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
+    &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,
+    &quot;nodejs_package_manager_path&quot;: &quot;npm&quot;,
+    &quot;project.structure.last.edited&quot;: &quot;Modules&quot;,
+    &quot;project.structure.proportion&quot;: &quot;0.0&quot;,
+    &quot;project.structure.side.proportion&quot;: &quot;0.2&quot;,
+    &quot;settings.editor.selected.configurable&quot;: &quot;org.jetbrains.plugins.github.ui.GithubSettingsConfigurable&quot;,
+    &quot;ts.external.directory.path&quot;: &quot;/Applications/PyCharm.app/Contents/plugins/JavaScriptLanguage/jsLanguageServicesImpl/external&quot;
+  },
+  &quot;keyToStringList&quot;: {
+    &quot;DatabaseDriversLRU&quot;: [
+      &quot;postgresql&quot;
+    ]
   }
-}]]></component>
+}</component>
   <component name="RecentsManager">
     <key name="MoveFile.RECENT_KEYS">
       <recent name="C:\Users\natal\Documents\cursos\TuboTecReal" />
     </key>
   </component>
   <component name="RunManager" selected="npm.start">
+    <configuration name="banco.sql" type="DatabaseScript" editBeforeRun="true" temporary="true" nameIsGenerated="true">
+      <script-file value="$PROJECT_DIR$/tubotecreal-backend/banco.sql" />
+      <script-mode>FILE</script-mode>
+      <method v="2" />
+    </configuration>
     <configuration name="main" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
       <module name="TuboTecReal" />
       <option name="INTERPRETER_OPTIONS" value="" />
@@ -99,12 +89,12 @@
       <option name="INPUT_FILE" value="" />
       <method v="2" />
     </configuration>
-    <configuration name="tubotecreal-backend" type="Python.FastAPI">
-      <option name="file" value="C:\Users\natal\Documents\cursos\TuboTecReal\tubotecreal-backend\main.py" />
+    <configuration name="tuboteckreal-backend" type="Python.FastAPI">
+      <option name="file" value="$PROJECT_DIR$/tubotecreal-backend/main.py" />
       <module name="TuboTecReal" />
       <option name="INTERPRETER_OPTIONS" value="" />
       <option name="PARENT_ENVS" value="true" />
-      <option name="SDK_HOME" value="C:\Users\natal\miniconda3\envs\TuboTecReal\python.exe" />
+      <option name="SDK_HOME" value="$USER_HOME$/miniforge3/envs/TuboTecReal-Backend/bin/python" />
       <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/tubotecreal-backend" />
       <option name="IS_MODULE_SDK" value="false" />
       <option name="ADD_CONTENT_ROOTS" value="true" />
@@ -121,13 +111,14 @@
       <method v="2" />
     </configuration>
     <list>
-      <item itemvalue="FastAPI.tubotecreal-backend" />
+      <item itemvalue="Database Script.banco.sql" />
+      <item itemvalue="FastAPI.tuboteckreal-backend" />
       <item itemvalue="npm.start" />
       <item itemvalue="Python.main" />
     </list>
     <recent_temporary>
       <list>
-        <item itemvalue="Python.main" />
+        <item itemvalue="Database Script.banco.sql" />
       </list>
     </recent_temporary>
   </component>
@@ -143,8 +134,23 @@
       <workItem from="1661204147765" duration="4489000" />
       <workItem from="1661372219450" duration="1080000" />
       <workItem from="1661373355462" duration="3028000" />
-      <workItem from="1661476382537" duration="6503000" />
+      <workItem from="1661542204243" duration="1060000" />
+      <workItem from="1661613875381" duration="722000" />
+      <workItem from="1661617809736" duration="426000" />
+      <workItem from="1661618592775" duration="29000" />
+      <workItem from="1661618642512" duration="191000" />
+      <workItem from="1661622106703" duration="12800000" />
+      <workItem from="1661635309814" duration="1168000" />
+      <workItem from="1661636623553" duration="14000" />
     </task>
+    <task id="LOCAL-00001" summary="Adicionadas novas funcionalidades de arquivos.">
+      <created>1661636515199</created>
+      <option name="number" value="00001" />
+      <option name="presentableId" value="LOCAL-00001" />
+      <option name="project" value="LOCAL" />
+      <updated>1661636515199</updated>
+    </task>
+    <option name="localTasksCounter" value="2" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -155,7 +161,34 @@
       <map>
         <entry key="MAIN">
           <value>
-            <State />
+            <State>
+              <option name="FILTERS">
+                <map>
+                  <entry key="branch">
+                    <value>
+                      <list>
+                        <option value="origin/main" />
+                      </list>
+                    </value>
+                  </entry>
+                </map>
+              </option>
+            </State>
+          </value>
+        </entry>
+      </map>
+    </option>
+    <option name="RECENT_FILTERS">
+      <map>
+        <entry key="User">
+          <value>
+            <list>
+              <RecentGroup>
+                <option name="FILTER_VALUES">
+                  <option value="*" />
+                </option>
+              </RecentGroup>
+            </list>
           </value>
         </entry>
       </map>
@@ -163,11 +196,12 @@
   </component>
   <component name="VcsManagerConfiguration">
     <option name="ADD_EXTERNAL_FILES_SILENTLY" value="true" />
+    <MESSAGE value="Adicionadas novas funcionalidades de arquivos." />
+    <option name="LAST_COMMIT_MESSAGE" value="Adicionadas novas funcionalidades de arquivos." />
   </component>
   <component name="com.intellij.coverage.CoverageDataManagerImpl">
-    <SUITE FILE_PATH="coverage/TuboTecReal$main.coverage" NAME="main Coverage Results" MODIFIED="1661372265217" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/tubotecreal-backend" />
-    <SUITE FILE_PATH="coverage/TuboTecReal$tuboteckreal_backend.coverage" NAME="tuboteckreal-backend Coverage Results" MODIFIED="1661375473933" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/tubotecreal-backend" />
+    <SUITE FILE_PATH="coverage/TuboTecReal$tuboteckreal_backend.coverage" NAME="tuboteckreal-backend Coverage Results" MODIFIED="1661635316146" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/tubotecreal-backend" />
     <SUITE FILE_PATH="coverage/TuboTecReal$uvicorn.coverage" NAME="tubotecreal-backend Coverage Results" MODIFIED="1661374884266" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/tubotecreal-backend" />
-    <SUITE FILE_PATH="coverage/TuboTecReal$tubotecreal_backend.coverage" NAME="tubotecreal-backend Coverage Results" MODIFIED="1661542660693" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/tubotecreal-backend" />
+    <SUITE FILE_PATH="coverage/TuboTecReal$main.coverage" NAME="main Coverage Results" MODIFIED="1661372265217" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/tubotecreal-backend" />
   </component>
 </project>

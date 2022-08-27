@@ -1,3 +1,4 @@
+import json
 from datetime import date
 
 from pydantic import BaseModel
@@ -20,6 +21,39 @@ class CategoriaBase(BaseModel):
     """Classe base para representar categoria de produtos. """
     id: int
     descricao: str
+
+
+class Categoria(OrigemBase):
+    """Classe para representar categoria de produtos. """
+
+    class Config:
+        orm_mode = True
+
+
+class ArquivoBase(BaseModel):
+    """Classe base para representar arquivos. """
+    descricao: str
+
+
+class ArquivoNovo(ArquivoBase):
+    """Classe para representar arquivos novos. """
+    pass
+
+
+class ArquivoUpdate(ArquivoBase):
+    """Classe para representar arquivos novos. """
+    id: int
+
+
+class Arquivo(ArquivoNovo):
+    """Classe base para representar arquivos. """
+    id: int
+    localizacao: str
+    nome: str
+    tipo_midia: str
+
+    class Config:
+        orm_mode = True
 
 
 class Categoria(OrigemBase):
@@ -129,6 +163,7 @@ class Transacao(TransacaoBase):
     pagamento: TipoPagamento
     origem: Origem
     produto: Produto
+
 
     class Config:
         orm_mode = True

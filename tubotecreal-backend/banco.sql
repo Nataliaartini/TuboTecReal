@@ -4,6 +4,8 @@
 -- drop table transacoes cascade;
 -- drop table categoria_produto cascade;
 -- drop table tipo_pagamento cascade ;
+-- drop table arquivos cascade ;
+
 
 create table categoria_produto
 (
@@ -11,7 +13,6 @@ create table categoria_produto
     descricao varchar(50) not null
 );
 
--- auto-generated definition
 create table tipo_pagamento
 (
     id serial primary key,
@@ -29,12 +30,10 @@ create table produtos
     id serial primary key,
     descricao varchar(50) not null,
     preco double precision,
-    categoria_id integer references categoria_produto,
+    categoria_id integer references categoria_produto not null,
     quantidade_estoque integer
 );
 
-
--- auto-generated definition
 create table funcionarios
 (
     cpf varchar(14) not null primary key,
@@ -53,15 +52,23 @@ create table transacoes
     data_transacao timestamp not null,
     quantidade_produto integer not null,
     pago bool,
-    tipo_pagamento_id integer references tipo_pagamento,
-    origem_id integer references tipo_origem_produto,
-    produto_id integer references produtos
+    tipo_pagamento_id integer references tipo_pagamento not null,
+    origem_id integer references tipo_origem_produto not null,
+    produto_id integer references produtos not null
+);
+
+create table arquivos
+(
+    id serial primary key,
+    descricao varchar(100) not null,
+    localizacao varchar(200) not null,
+    nome varchar(100) not null,
+    tipo_midia varchar(50) not null
 );
 
 insert into categoria_produto values (nextval('categoria_produto_id_seq'), 'Matéria Prima');
 insert into categoria_produto values (nextval('categoria_produto_id_seq'), 'Limpeza');
 insert into categoria_produto values (nextval('categoria_produto_id_seq'), 'Escritório');
-insert into categoria_produto values (nextval('categoria_produto_id_seq'), 'Produto para revenda');
 
 
 insert into tipo_origem_produto values (nextval('tipo_origem_produto_id_seq'), 'Compra');

@@ -7,6 +7,7 @@ import {Route, Routes,} from "react-router-dom";
 import Produtos from './Produtos';
 import Funcionarios from './Funcionarios';
 import Financeiro from './Financeiro';
+import Arquivos from './Arquivos';
 
 import {DrawerHeader} from './DrawerHeader';
 
@@ -34,6 +35,7 @@ export default function App() {
                         <Route path="/" element={<Financeiro/>}/>
                         <Route path="funcionarios" element={<Funcionarios/>}/>
                         <Route path="produtos" element={<Produtos/>}/>
+                        <Route path="arquivos" element={<Arquivos/>}/>
                     </Routes>
                 </Box>
             </Box>

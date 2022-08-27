@@ -12,7 +12,7 @@ import IconButton from "@mui/material/IconButton";
 import MenuIcon from "@mui/icons-material/Menu";
 import ChevronLeftIcon from "@mui/icons-material/ChevronLeft";
 import ChevronRightIcon from "@mui/icons-material/ChevronRight";
-import {mainListItems} from "../utils/menuItems";
+import {mainListItems} from "./ItensMenu";
 import {DrawerHeader} from "./DrawerHeader";
 
 const drawerWidth = 240;
