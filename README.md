@@ -1,7 +1,6 @@
 # TuboTecReal
 <h2>Projeto integrador das matérias: banco de dados I, Engenharia de Software I, e Programação II.</h2>
 
-<hr>
 
 <p>O presente projeto consiste em um sistema gerenciador de transações financeiras, estoque de produtos e quadro de funcionários. O sistema foi desenvolvido para uso da empresa TuboTec Real, com objetivo de facilitar as tarefas diárias do setor administrativo da empresa, tornando mais fácil e rápido o acesso as informações principais da empresa.</p>
 
