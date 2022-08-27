@@ -10,3 +10,5 @@ Projeto integrador das matérias: banco de dados I, Engenharia de Software I, e 
 
 ![prototipofunc](https://user-images.githubusercontent.com/79176834/187051451-93a6e9cf-9145-43e6-8300-05ecf2a7aeab.png)
 
+![prototipoprod](https://user-images.githubusercontent.com/79176834/187051529-28e24f2d-6d2e-4462-8fa2-2283991a6b4f.png)
+![prototipofinanceiro](https://user-images.githubusercontent.com/79176834/187051525-18d82fd5-61e6-4196-a03a-4a4d4929a91a.png)
