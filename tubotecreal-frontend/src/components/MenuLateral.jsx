@@ -1,5 +1,5 @@
 import * as React from "react";
-import { styled, useTheme } from "@mui/material/styles";
+import {styled, useTheme} from "@mui/material/styles";
 import Box from "@mui/material/Box";
 import MuiDrawer from "@mui/material/Drawer";
 import MuiAppBar from "@mui/material/AppBar";
@@ -12,8 +12,8 @@ import IconButton from "@mui/material/IconButton";
 import MenuIcon from "@mui/icons-material/Menu";
 import ChevronLeftIcon from "@mui/icons-material/ChevronLeft";
 import ChevronRightIcon from "@mui/icons-material/ChevronRight";
-import { mainListItems } from "../utils/menuItems";
-import { DrawerHeader } from "./DrawerHeader";
+import {mainListItems} from "../utils/menuItems";
+import {DrawerHeader} from "./DrawerHeader";
 
 const drawerWidth = 240;
 
@@ -40,7 +40,7 @@ const closedMixin = (theme) => ({
 
 const AppBar = styled(MuiAppBar, {
     shouldForwardProp: (prop) => prop !== "open",
-})(({ theme, open }) => ({
+})(({theme, open}) => ({
     zIndex: theme.zIndex.drawer + 1,
     transition: theme.transitions.create(["width", "margin"], {
         easing: theme.transitions.easing.sharp,
@@ -58,7 +58,7 @@ const AppBar = styled(MuiAppBar, {
 
 const Drawer = styled(MuiDrawer, {
     shouldForwardProp: (prop) => prop !== "open",
-})(({ theme, open }) => ({
+})(({theme, open}) => ({
     width: drawerWidth,
     flexShrink: 0,
     whiteSpace: "nowrap",
@@ -86,12 +86,12 @@ export default function MenuLateral() {
     };
 
     return (
-        <Box sx={{ display: "flex" }}>
-            <CssBaseline />
+        <Box sx={{display: "flex"}}>
+            <CssBaseline/>
             <AppBar
                 position="fixed"
                 open={open}
-                style={{ background: "#2e7d32" }}
+                style={{background: "#2e7d32"}}
             >
                 <Toolbar>
                     <IconButton
@@ -101,10 +101,10 @@ export default function MenuLateral() {
                         edge="start"
                         sx={{
                             marginRight: 5,
-                            ...(open && { display: "none" }),
+                            ...(open && {display: "none"}),
                         }}
                     >
-                        <MenuIcon />
+                        <MenuIcon/>
                     </IconButton>
                     <Typography variant="h6" noWrap component="div">
                         TuboTec
@@ -115,13 +115,13 @@ export default function MenuLateral() {
                 <DrawerHeader>
                     <IconButton onClick={handleDrawerClose}>
                         {theme.direction === "rtl" ? (
-                            <ChevronRightIcon />
+                            <ChevronRightIcon/>
                         ) : (
-                            <ChevronLeftIcon />
+                            <ChevronLeftIcon/>
                         )}
                     </IconButton>
                 </DrawerHeader>
-                <Divider />
+                <Divider/>
                 <List>{mainListItems}</List>
             </Drawer>
         </Box>

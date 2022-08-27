@@ -1,6 +1,7 @@
+import models
+import schemas
 from fastapi import HTTPException
 from sqlalchemy.orm import Session
-import models, schemas
 
 
 def insere_transacao(db: Session, transacao: schemas.TransacaoNova):
@@ -84,13 +85,12 @@ def busca_transacoes_por_status(db: Session, transacao_status: bool, skip: int =
 
     transacoes_pagas = db.query(
         models.Transacao).filter(models.Transacao.pago == transacao_status).order_by(
-            models.Transacao.id).offset(skip).limit(limit).all()
+        models.Transacao.id).offset(skip).limit(limit).all()
 
     if transacoes_pagas is None:
         raise HTTPException(status_code=404, detail="Transação não encontrada.")
 
     return transacoes_pagas
-
 
 
 def busca_todas_transacoes(db: Session, skip: int = 0, limit: int = 100):

@@ -2,12 +2,11 @@ from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
 
 from database import engine
-
 from models import Base
+
 Base.metadata.create_all(bind=engine)
 
 from routers import produtos, funcionarios, origens, categorias, pagamentos, transacoes
-
 
 app = FastAPI()
 
@@ -23,7 +22,6 @@ app.add_middleware(
     allow_methods=["*"],
     allow_headers=["*"],
 )
-
 
 app.include_router(categorias.router)
 app.include_router(funcionarios.router)

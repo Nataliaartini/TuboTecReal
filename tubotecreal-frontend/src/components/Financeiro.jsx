@@ -1,26 +1,14 @@
 import React from "react";
-import {
-    Box,
-    Button,
-    Divider,
-    Grid,
-    IconButton,
-    MenuItem,
-    Paper,
-    Select,
-    Stack,
-    TextField,
-    Typography,
-} from "@mui/material";
+import {Box, Button, Grid, IconButton, MenuItem, Paper, Select, Stack, TextField, Typography,} from "@mui/material";
 import DeleteIcon from "@mui/icons-material/Delete";
 import axios from "axios";
 import ResultMessage from "./ResultMessage";
-import { DesktopDatePicker, LocalizationProvider } from "@mui/x-date-pickers/";
-import { AdapterDateFns } from "@mui/x-date-pickers/AdapterDateFns";
+import {DesktopDatePicker, LocalizationProvider} from "@mui/x-date-pickers/";
+import {AdapterDateFns} from "@mui/x-date-pickers/AdapterDateFns";
 import dateFormat from "dateformat";
 import ptBR from "date-fns/esm/locale/pt-BR/index.js";
 
-import { AgGridColumn, AgGridReact } from "ag-grid-react";
+import {AgGridColumn, AgGridReact} from "ag-grid-react";
 import "ag-grid-community";
 import "ag-grid-community/dist/styles/ag-grid.css";
 import "ag-grid-community/dist/styles/ag-theme-material.css";
@@ -30,7 +18,7 @@ import UseWindowDimensions from "../hooks/UseWindowDimensions";
 export default function Financeiro() {
     const gridRef = React.useRef();
 
-    const { height } = UseWindowDimensions();
+    const {height} = UseWindowDimensions();
     const [gridColumnApi, setGridColumnApi] = React.useState(null);
     const [gridApi, setGridApi] = React.useState(null);
 
@@ -105,7 +93,7 @@ export default function Financeiro() {
                         totalSaida =
                             totalSaida +
                             transacao.quantidade_produto *
-                                transacao.produto.preco;
+                            transacao.produto.preco;
                     }
                 }
             }
@@ -236,11 +224,11 @@ export default function Financeiro() {
     }
 
     return (
-        <main style={{ padding: "1rem 0" }}>
+        <main style={{padding: "1rem 0"}}>
             <h2>Financeiro</h2>
-            <Box sx={{ width: "100%" }}>
+            <Box sx={{width: "100%"}}>
                 <Stack spacing={2}>
-                    <main style={{ padding: "1rem 0" }}>
+                    <main style={{padding: "1rem 0"}}>
                         <Box component="form">
                             <Paper
                                 style={{
@@ -306,7 +294,7 @@ export default function Financeiro() {
                                     label="Origem"
                                     size="small"
                                     value={origem}
-                                    inputProps={{ readOnly: update }}
+                                    inputProps={{readOnly: update}}
                                     onChange={(e) => setOrigem(e.target.value)}
                                 >
                                     {listaOrigens.map((_symbol) => (
@@ -379,7 +367,7 @@ export default function Financeiro() {
                                                 aria-label="delete"
                                                 onClick={handleDeleteClick}
                                             >
-                                                <DeleteIcon />
+                                                <DeleteIcon/>
                                             </IconButton>
                                         )}
                                     </Grid>
@@ -396,7 +384,7 @@ export default function Financeiro() {
                             }}
                         />
                     </main>
-                    <div style={{ width: "90%" }}>
+                    <div style={{width: "90%"}}>
                         <Typography variant="body1">
                             Total de transações em R$: {totalTransacoes}
                         </Typography>
@@ -405,7 +393,7 @@ export default function Financeiro() {
                             Total de saídas em R$: {totalTransacoesSaida}
                         </Typography>
                     </div>
-                    <div style={{ height: height * 0.75, width: "90%" }}>
+                    <div style={{height: height * 0.75, width: "90%"}}>
                         <AgGridReact
                             ref={gridRef}
                             rowData={listaTransacoes}
@@ -428,7 +416,7 @@ export default function Financeiro() {
                             <AgGridColumn
                                 field="descricao"
                                 headerName="Descrição"
-                                cellStyle={{ textAlign: "left" }}
+                                cellStyle={{textAlign: "left"}}
                             />
                             <AgGridColumn
                                 field="quantidade_produto"

@@ -1,6 +1,7 @@
+import models
+import schemas
 from fastapi import HTTPException
 from sqlalchemy.orm import Session
-import models, schemas
 
 
 def insere_produto(db: Session, produto: schemas.ProdutoNovo):
@@ -37,7 +38,7 @@ def remove_produto(db: Session, produto_id: int):
 
     produto_ = db.get(models.Produto, produto_id)
     if produto_ is None:
-         raise HTTPException(status_code=404, detail="Produto não encontrado.")
+        raise HTTPException(status_code=404, detail="Produto não encontrado.")
 
     db.delete(produto_)
     db.commit()

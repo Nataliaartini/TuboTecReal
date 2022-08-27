@@ -1,34 +1,36 @@
-from fastapi import APIRouter, Depends
-from sqlalchemy.orm import Session
-from database import get_db
-
 import schemas
+from database import get_db
+from fastapi import APIRouter, Depends
 from services import transacoes
+from sqlalchemy.orm import Session
 
 router = APIRouter(
     prefix="/api/transacoes",
-    tags=["origtransacoesns"],
+    tags=["transacoes"],
     responses={404: {
         "description": "Not found"
     }},
 )
 
+
 @router.post("/", response_model=schemas.Transacao)
 async def criar_transacao(
-    transacao: schemas.TransacaoNova,
-    db: Session = Depends(get_db)):
+        transacao: schemas.TransacaoNova,
+        db: Session = Depends(get_db)):
     return transacoes.insere_transacao(db=db, transacao=transacao)
+
 
 @router.put("/", response_model=schemas.Transacao)
 async def atualizar_transacao(
-    transacao: schemas.TransacaoUpdate,
-    db: Session = Depends(get_db)):
+        transacao: schemas.TransacaoUpdate,
+        db: Session = Depends(get_db)):
     return transacoes.atualiza_transacao(db=db, transacao=transacao)
+
 
 @router.delete("/{transacao_id}")
 async def remover_transacao(
-    transacao_id: int,
-    db: Session = Depends(get_db)):
+        transacao_id: int,
+        db: Session = Depends(get_db)):
     return transacoes.remove_transacao(db=db, transacao_id=transacao_id)
 
 
@@ -49,8 +51,8 @@ def busca_transacoes_por_status(transacao_status: int, db: Session = Depends(get
 
 @router.get("/all/", response_model=list[schemas.Transacao])
 def lista_transacoes(
-    skip: int = 0,
-    limit: int = 100,
-    db: Session = Depends(get_db)):
+        skip: int = 0,
+        limit: int = 100,
+        db: Session = Depends(get_db)):
     lista_transacoes = transacoes.busca_todas_transacoes(db, skip=skip, limit=limit)
     return lista_transacoes

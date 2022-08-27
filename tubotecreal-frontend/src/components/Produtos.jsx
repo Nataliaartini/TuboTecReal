@@ -1,21 +1,11 @@
 import React from "react";
-import {
-    Box,
-    Button,
-    Grid,
-    IconButton,
-    MenuItem,
-    Paper,
-    Select,
-    Stack,
-    TextField,
-} from "@mui/material";
+import {Box, Button, Grid, IconButton, MenuItem, Paper, Select, Stack, TextField,} from "@mui/material";
 import DeleteIcon from "@mui/icons-material/Delete";
 import axios from "axios";
 import NumberFormat from "react-number-format";
 import ResultMessage from "./ResultMessage";
 
-import { AgGridColumn, AgGridReact } from "ag-grid-react";
+import {AgGridColumn, AgGridReact} from "ag-grid-react";
 import "ag-grid-community";
 import "ag-grid-community/dist/styles/ag-grid.css";
 import "ag-grid-community/dist/styles/ag-theme-material.css";
@@ -26,7 +16,7 @@ const NumberFormatCustom = React.forwardRef(function NumberFormatCustom(
     props,
     ref
 ) {
-    const { onChange, ...other } = props;
+    const {onChange, ...other} = props;
 
     return (
         <NumberFormat
@@ -50,7 +40,7 @@ const NumberFormatCustom = React.forwardRef(function NumberFormatCustom(
 export default function Produtos() {
     const gridRef = React.useRef();
 
-    const { height } = UseWindowDimensions();
+    const {height} = UseWindowDimensions();
     const [gridColumnApi, setGridColumnApi] = React.useState(null);
     const [gridApi, setGridApi] = React.useState(null);
 
@@ -192,11 +182,11 @@ export default function Produtos() {
     }
 
     return (
-        <main style={{ padding: "1rem 0" }}>
+        <main style={{padding: "1rem 0"}}>
             <h2>Produtos</h2>
-            <Box sx={{ width: "100%" }}>
+            <Box sx={{width: "100%"}}>
                 <Stack spacing={2}>
-                    <main style={{ padding: "1rem 0" }}>
+                    <main style={{padding: "1rem 0"}}>
                         <Box component="form">
                             <Paper
                                 style={{
@@ -295,7 +285,7 @@ export default function Produtos() {
                                                 aria-label="delete"
                                                 onClick={handleDeleteClick}
                                             >
-                                                <DeleteIcon />
+                                                <DeleteIcon/>
                                             </IconButton>
                                         )}
                                     </Grid>
@@ -312,7 +302,7 @@ export default function Produtos() {
                             }}
                         />
                     </main>
-                    <div style={{ height: height * 0.75, width: "90%" }}>
+                    <div style={{height: height * 0.75, width: "90%"}}>
                         <AgGridReact
                             ref={gridRef}
                             rowData={listaProdutos}
@@ -335,9 +325,9 @@ export default function Produtos() {
                             <AgGridColumn
                                 field="descricao"
                                 headerName="Descrição"
-                                cellStyle={{ textAlign: "left" }}
+                                cellStyle={{textAlign: "left"}}
                             />
-                            <AgGridColumn field="preco" headerName="Preço" />
+                            <AgGridColumn field="preco" headerName="Preço"/>
                             <AgGridColumn
                                 field="categoria.descricao"
                                 headerName="Categoria"

@@ -20,29 +20,26 @@ axios.defaults.headers.common["Content-Type"] =
 export default function App() {
 
 
+    return (
+        <div className="App">
+
+            <Box sx={{display: 'flex'}}>
+                <CssBaseline/>
+
+                <MenuLateral/>
+
+                <Box component="main" sx={{flexGrow: 1, p: 3}}>
+                    <DrawerHeader/>
+                    <Routes>
+                        <Route path="/" element={<Financeiro/>}/>
+                        <Route path="funcionarios" element={<Funcionarios/>}/>
+                        <Route path="produtos" element={<Produtos/>}/>
+                    </Routes>
+                </Box>
+            </Box>
 
 
-  return (
-    <div className="App">
-
-      <Box sx={{ display: 'flex' }}>
-      <CssBaseline />
-
-      <MenuLateral/>
-
-      <Box component="main" sx={{ flexGrow: 1, p: 3 }}>
-        <DrawerHeader />
-        <Routes>
-          <Route path="/" element={<Financeiro />} />
-          <Route path="funcionarios" element={<Funcionarios />} />
-          <Route path="produtos" element={<Produtos />} />
-        </Routes>
-      </Box>
-    </Box>
-
-
-
-    </div>
-  );
+        </div>
+    );
 }
 

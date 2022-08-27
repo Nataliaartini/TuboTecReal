@@ -1,6 +1,5 @@
-from sqlalchemy import Boolean, Column, ForeignKey, Integer, String, Float, DateTime, Table
+from sqlalchemy import Boolean, Column, ForeignKey, Integer, String, Float, DateTime
 from sqlalchemy.orm import relationship
-from sqlalchemy.ext.associationproxy import association_proxy
 
 from database import Base
 
@@ -23,7 +22,6 @@ class Categoria(Base):
     descricao = Column(String(50), nullable=False)
 
     produtos = relationship("Produto", back_populates="categoria")
-
 
 
 class TipoPagamento(Base):
@@ -50,7 +48,6 @@ class Produto(Base):
     transacoes = relationship("Transacao", back_populates="produto")
 
 
-
 class Funcionario(Base):
     """ Classe para representar a tabela `funcionarios` no banco de dados."""
     __tablename__ = "funcionarios"
@@ -62,7 +59,6 @@ class Funcionario(Base):
     salario = Column(Float)
     data_inicio = Column(DateTime, nullable=False)
     data_desligamento = Column(DateTime, nullable=True)
-
 
 
 class Transacao(Base):

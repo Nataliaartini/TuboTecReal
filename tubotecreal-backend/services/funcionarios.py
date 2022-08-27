@@ -1,6 +1,7 @@
+import models
+import schemas
 from fastapi import HTTPException
 from sqlalchemy.orm import Session
-import models, schemas
 
 
 def insere_funcionario(db: Session, funcionario: schemas.Funcionario):
@@ -13,7 +14,6 @@ def insere_funcionario(db: Session, funcionario: schemas.Funcionario):
     db.refresh(funcionario_novo)
 
     return funcionario_novo
-
 
 
 def atualiza_funcionario(db: Session, funcionario: schemas.Funcionario):
@@ -33,19 +33,17 @@ def atualiza_funcionario(db: Session, funcionario: schemas.Funcionario):
     return funcionario_
 
 
-
 def remove_funcionario(db: Session, cpf: str):
     """ Função para remover um produto do banco de dados """
 
     funcionario_ = db.get(models.Funcionario, cpf)
     if funcionario_ is None:
-         raise HTTPException(status_code=404, detail="Funcionário não encontrado.")
+        raise HTTPException(status_code=404, detail="Funcionário não encontrado.")
 
     db.delete(funcionario_)
     db.commit()
 
     return None
-
 
 
 def busca_funcionario_por_cpf(db: Session, cpf: str):
@@ -57,7 +55,6 @@ def busca_funcionario_por_cpf(db: Session, cpf: str):
         raise HTTPException(status_code=404, detail="Funcionario não encontrado.")
 
     return funcionario_
-
 
 
 def busca_funcionario_por_nome(db: Session, nome: str):

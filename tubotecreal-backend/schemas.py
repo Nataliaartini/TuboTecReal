@@ -1,5 +1,5 @@
 from datetime import date
-from typing import List
+
 from pydantic import BaseModel
 
 
@@ -8,30 +8,39 @@ class OrigemBase(BaseModel):
     id: int
     descricao: str
 
+
 class Origem(OrigemBase):
     """Classe para representar tipo de origem de produtos. """
+
     class Config:
         orm_mode = True
+
 
 class CategoriaBase(BaseModel):
     """Classe base para representar categoria de produtos. """
     id: int
     descricao: str
 
+
 class Categoria(OrigemBase):
     """Classe para representar categoria de produtos. """
+
     class Config:
         orm_mode = True
+
 
 class TipoPagamentoBase(BaseModel):
     """Classe base para representar moedas de transação. """
     id: int
     descricao: str
 
+
 class TipoPagamento(TipoPagamentoBase):
     """Classe para representar moedas de transação. """
+
     class Config:
         orm_mode = True
+
 
 class ProdutoBase(BaseModel):
     """ Classe para representar a base do modelo de Produto. """
@@ -53,6 +62,7 @@ class ProdutoUpdate(ProdutoBase):
     class Config:
         orm_mode = True
 
+
 class Produto(ProdutoBase):
     """ Classe para representar o modelo de Produto completo."""
     id: int
@@ -71,6 +81,7 @@ class FuncionarioBase(BaseModel):
     salario: float
     data_inicio: date
     data_desligamento: date | None = None
+
 
 class Funcionario(FuncionarioBase):
     """ Classe para representar o modelo de Funcionário para inserir. """
