@@ -69,6 +69,7 @@ create table arquivos
 insert into categoria_produto values (nextval('categoria_produto_id_seq'), 'Matéria Prima');
 insert into categoria_produto values (nextval('categoria_produto_id_seq'), 'Limpeza');
 insert into categoria_produto values (nextval('categoria_produto_id_seq'), 'Escritório');
+insert into categoria_produto values (nextval('categoria_produto_id_seq'), 'Produto para revenda');
 
 
 insert into tipo_origem_produto values (nextval('tipo_origem_produto_id_seq'), 'Compra');
