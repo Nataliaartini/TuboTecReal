@@ -11,7 +11,6 @@ tubotecreal-frontend/node_modules
 
 # production
 /build
-/*__pycache__*/
 
 # misc
 .DS_Store
@@ -28,6 +27,6 @@ yarn-error.log*
 /*.idea*/
 
 /*pycache*/
-services/*pycache*/
 __pycache__/
 .idea/
+*.pdf
