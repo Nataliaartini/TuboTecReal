@@ -13,7 +13,9 @@ def insere_transacao(db: Session, transacao: schemas.TransacaoNova):
     if transacao_nova.origem_id == 1 or transacao_nova.origem_id == 3:
         produto_.quantidade_estoque += transacao_nova.quantidade_produto
     else:
-        produto_.quantidade_estoque -= transacao_nova.quantidade_produto
+        if produto_.quantidade_estoque > transacao_nova.quantidade_produto:
+            produto_.quantidade_estoque -= transacao_nova.quantidade_produto
+        raise HTTPException(status_code=409, detail="Estoque insuficiente! Por favor verifique.")
 
     db.add(produto_)
     db.add(transacao_nova)
