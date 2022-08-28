@@ -27,3 +27,6 @@ yarn-error.log*
 /*.idea*/
 
 /*pycache*/
+__pycache__/
+.idea/
+*.pdf
