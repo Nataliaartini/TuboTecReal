@@ -7,8 +7,6 @@ import fileDownload from 'js-file-download';
 
 export default function DownloadBtn(props) {
 
-
-
     function downloadArquivo() {
         console.log(props);
         axios

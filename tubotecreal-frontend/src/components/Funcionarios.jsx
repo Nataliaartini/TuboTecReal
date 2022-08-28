@@ -219,7 +219,7 @@ export default function Funcionarios() {
     function handleCancelClick() {
         resetForm();
         setOpenMessage(true);
-        setMessageText("Cadastrado cancelado!");
+        setMessageText("Cadastro cancelado!");
         setMessageSeverity("warning");
     }
 
@@ -227,12 +227,12 @@ export default function Funcionarios() {
         axios
             .delete(`/funcionarios/${funcionario.cpf}`)
             .then((res) => {
-                setMessageText("Produto removido com sucesso!");
+                setMessageText("Funcionário removido com sucesso!");
                 setMessageSeverity("success");
                 resetForm();
             })
             .catch((error) => {
-                setMessageText("Erro ao remover dados do Produto no servidor.");
+                setMessageText("Erro ao remover dados do Funcionário no servidor.");
                 setMessageSeverity("error");
                 console.log(error);
             })
