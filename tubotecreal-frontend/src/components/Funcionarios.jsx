@@ -319,7 +319,7 @@ export default function Funcionarios() {
                                 <TextField
                                     required
                                     id="salario-input"
-                                    label="Salario"
+                                    label="Salário"
                                     size="small"
                                     onChange={(e) => setSalario(e.target.value)}
                                     InputProps={{

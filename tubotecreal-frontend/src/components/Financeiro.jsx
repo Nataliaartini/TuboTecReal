@@ -1,5 +1,5 @@
 import React from "react";
-import {Box, Button, Grid, IconButton, MenuItem, Paper, Select, Stack, TextField, Typography,} from "@mui/material";
+import {Box, Button, Grid, IconButton, MenuItem, Paper, Select, Stack, TextField, Typography, InputLabel} from "@mui/material";
 import DeleteIcon from "@mui/icons-material/Delete";
 import axios from "axios";
 import ResultMessage from "./ResultMessage";
@@ -270,15 +270,16 @@ export default function Financeiro() {
                                     }
                                     value={quantidade}
                                 />
-
-                                <Select
-                                    id="select-moeda"
-                                    label="Tipo de Pagamento"
-                                    size="small"
-                                    value={tipoPagamento}
-                                    onChange={(e) =>
-                                        setTipoPagamento(e.target.value)
-                                    }
+                            {/*<InputLabel id="select-moeda">Tipo de Pagamento</InputLabel>*/}
+                                <TextField
+                                    select
+                                        id="select-moeda"
+                                        label="Tipo de Pagamento"
+                                        size="small"
+                                        value={tipoPagamento}
+                                        onChange={(e) =>
+                                            setTipoPagamento(e.target.value)
+                                        }
                                 >
                                     {listaMoedas.map((_symbol) => (
                                         <MenuItem
@@ -288,14 +289,16 @@ export default function Financeiro() {
                                             {_symbol.descricao}
                                         </MenuItem>
                                     ))}
-                                </Select>
-                                <Select
-                                    id="select-origem"
-                                    label="Origem"
-                                    size="small"
-                                    value={origem}
-                                    inputProps={{readOnly: update}}
-                                    onChange={(e) => setOrigem(e.target.value)}
+                                </TextField>
+                                <TextField
+                                    select
+                                            id="select-origem"
+                                            label="Origem"
+                                            text="origem"
+                                            size="small"
+                                            value={origem}
+                                            inputProps={{readOnly: update}}
+                                            onChange={(e) => setOrigem(e.target.value)}
                                 >
                                     {listaOrigens.map((_symbol) => (
                                         <MenuItem
@@ -305,13 +308,14 @@ export default function Financeiro() {
                                             {_symbol.descricao}
                                         </MenuItem>
                                     ))}
-                                </Select>
-                                <Select
-                                    id="select-produto"
-                                    label="Produto"
-                                    size="small"
-                                    value={produto}
-                                    onChange={(e) => setProduto(e.target.value)}
+                                </TextField>
+                                <TextField
+                                    select
+                                        id="select-produto"
+                                        label="Produto"
+                                        size="small"
+                                        value={produto}
+                                        onChange={(e) => setProduto(e.target.value)}
                                 >
                                     {listaProdutos.map((_symbol) => (
                                         <MenuItem
@@ -322,7 +326,7 @@ export default function Financeiro() {
                                             {_symbol.quantidade_estoque}
                                         </MenuItem>
                                     ))}
-                                </Select>
+                                </TextField>
                                 <Grid container spacing={2}>
                                     <Grid
                                         xs
@@ -427,14 +431,14 @@ export default function Financeiro() {
                                 headerName="Data Transação"
                                 valueFormatter={columnDateFormatter}
                             />
-                            <AgGridColumn
-                                field="pago"
-                                headerName="Pago"
-                                valueFormatter={columnPagoFormatter}
-                            />
+                            {/*<AgGridColumn*/}
+                            {/*    field="pago"*/}
+                            {/*    headerName="Pago"*/}
+                            {/*    valueFormatter={columnPagoFormatter}*/}
+                            {/*/>*/}
                             <AgGridColumn
                                 field="pagamento.descricao"
-                                headerName="Moeda"
+                                headerName="Tipo Pagamento"
                             />
                             <AgGridColumn
                                 field="origem.descricao"

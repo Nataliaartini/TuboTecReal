@@ -225,14 +225,15 @@ export default function Produtos() {
                                     onChange={(e) => setEstoque(e.target.value)}
                                     value={estoque}
                                 />
-                                <Select
-                                    id="select-origem"
-                                    label="Origem"
-                                    size="small"
-                                    value={categoria}
-                                    onChange={(e) =>
-                                        setCategoria(e.target.value)
-                                    }
+                                <TextField
+                                    select
+                                        id="select-origem"
+                                        label="Destinação"
+                                        size="small"
+                                        value={categoria}
+                                        onChange={(e) =>
+                                            setCategoria(e.target.value)
+                                        }
                                 >
                                     {categoriaList.map((_symbol) => (
                                         <MenuItem
@@ -242,7 +243,7 @@ export default function Produtos() {
                                             {_symbol.descricao}
                                         </MenuItem>
                                     ))}
-                                </Select>
+                                </TextField>
                                 <Grid container spacing={2}>
                                     <Grid
                                         xs

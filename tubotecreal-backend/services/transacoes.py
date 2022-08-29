@@ -40,8 +40,10 @@ def atualiza_transacao(db: Session, transacao: schemas.TransacaoUpdate):
     if transacao.origem_id == 1 or transacao.origem_id == 3:
         produto_.quantidade_estoque += diff
     else:
-        produto_.quantidade_estoque -= diff
-
+        if produto_.quantidade_estoque >= diff:
+            produto_.quantidade_estoque -= diff
+        else:
+            raise HTTPException(status_code=409, detail="Estoque insuficiente! Por favor verifique.")
     # atualiza os campos necessários
     for var, value in vars(transacao).items():
         setattr(transacao_, var, value) if value else None
