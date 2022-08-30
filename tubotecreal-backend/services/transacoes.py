@@ -10,7 +10,7 @@ def insere_transacao(db: Session, transacao: schemas.TransacaoNova):
     transacao_nova = models.Transacao(**transacao.dict())
 
     produto_ = db.get(models.Produto, transacao.produto_id)
-    if transacao_nova.origem_id == 1 or transacao_nova.origem_id == 3:
+    if transacao_nova.quantidade_produto >= 1 and (transacao_nova.origem_id == 1 or transacao_nova.origem_id == 3):
         produto_.quantidade_estoque += transacao_nova.quantidade_produto
     else:
         if produto_.quantidade_estoque >= transacao_nova.quantidade_produto:

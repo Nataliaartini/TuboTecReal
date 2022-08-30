@@ -273,6 +273,7 @@ export default function Financeiro() {
                             {/*<InputLabel id="select-moeda">Tipo de Pagamento</InputLabel>*/}
                                 <TextField
                                     select
+                                        required
                                         id="select-moeda"
                                         label="Tipo de Pagamento"
                                         size="small"
@@ -292,13 +293,14 @@ export default function Financeiro() {
                                 </TextField>
                                 <TextField
                                     select
-                                            id="select-origem"
-                                            label="Origem"
-                                            text="origem"
-                                            size="small"
-                                            value={origem}
-                                            inputProps={{readOnly: update}}
-                                            onChange={(e) => setOrigem(e.target.value)}
+                                        required
+                                        id="select-origem"
+                                        label="Origem"
+                                        text="origem"
+                                        size="small"
+                                        value={origem}
+                                        inputProps={{readOnly: update}}
+                                        onChange={(e) => setOrigem(e.target.value)}
                                 >
                                     {listaOrigens.map((_symbol) => (
                                         <MenuItem
@@ -311,6 +313,7 @@ export default function Financeiro() {
                                 </TextField>
                                 <TextField
                                     select
+                                        required
                                         id="select-produto"
                                         label="Produto"
                                         size="small"

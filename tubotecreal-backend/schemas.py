@@ -56,11 +56,11 @@ class Arquivo(ArquivoNovo):
         orm_mode = True
 
 
-class Categoria(OrigemBase):
-    """Classe para representar categoria de produtos. """
-
-    class Config:
-        orm_mode = True
+# class Categoria(OrigemBase):
+#     """Classe para representar categoria de produtos. """
+#
+#     class Config:
+#         orm_mode = True
 
 
 class TipoPagamentoBase(BaseModel):
